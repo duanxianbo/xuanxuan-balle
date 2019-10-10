@@ -1,0 +1,64 @@
+/* pages/vip/vip.wxss */
+.array_position{
+   right:30rpx;
+}
+
+.block1{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  height: 90rpx;
+  margin-bottom: 40rpx;
+  left:30rpx;
+
+}
+
+ .bottom{
+bottom: 0rpx;
+width: 100%;
+display: flex;
+position: absolute;
+z-index: -1;
+}
+
+.bottom-image{
+  width: 100%;
+
+}
+
+.cont{
+  position: relative;
+  width: 100%;
+  height: 350rpx;
+  text-align: center;
+  background-color: beige;
+}
+/* 头像 */
+.list_img{
+  position: relative;
+  top: 25%;
+  width: 144rpx;
+  height: 144rpx;
+  border-radius: 50%;
+}
+/* button外层视图 */
+.button{
+  position: relative;
+  text-align: center;
+  top: 100rpx;
+  width: 100%;
+  height: 100rpx;
+}
+/* 按钮居中 */
+.btn_sub{
+  width: 80%;
+  height: 100rpx;
+  background-color: aquamarine;
+  border: 0rpx;
+
+}
+
+.image{
+width: 100%;
+
+}

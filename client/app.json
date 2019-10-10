@@ -1,0 +1,88 @@
+{
+  "pages": [
+         "pages/index/index",
+         "pages/inform/single",
+         "pages/inform/yearCard", 
+      "pages/photo/photo0",
+      "pages/vip/vip",
+    "pages/canlendar/canlendar",
+        "pages/mine/mine",
+        "pages/shop/search",
+        "pages/groupBuy/groupBuy",
+        "pages/yearCard/yearCard",
+        "pages/visual/visual",
+        "pages/schedule/schedule",
+      "pages/video/video",
+       "pages/aboutMe/aboutMe",
+    "pages/groupBuy/groupBuy_share",
+    "pages/pay/pay_single",
+    "pages/pay/pay_yearCard",
+    "pages/mine/group",
+    "pages/mine/order",
+  "pages/mine/yearCard",
+    "pages/card/card",
+    "pages/card/card0",
+    "pages/class/class",
+    "pages/photo/photo",
+    "pages/login/login",
+    "pages/login/login1",
+    "pages/login/login2",
+    "pages/login/yearCard",
+    "pages/login/groupBuy",
+    "pages/login/photo",
+    "pages/login/aboutMe",
+     "pages/login/video",
+    "pages/login/video_card",
+    "pages/login/image",
+    "pages/video/video1"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "white",
+    "navigationBarTitleText": "ENJOY DANCE",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#878787",
+    "selectedColor": "#000",
+    "borderStyle": "black",
+    "backgroundColor": "#fcfcfc",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "pages/images/tabBar/home_2.png",
+        "selectedIconPath": "pages/images/tabBar/home_1.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/vip/vip",
+        "iconPath": "pages/images/tabBar/vip_2.png",
+        "selectedIconPath": "pages/images/tabBar/vip_1.png",
+        "text": "会员服务"
+      },
+      {
+        "pagePath": "pages/shop/search",
+        "iconPath": "pages/images/tabBar/group_2.png",
+        "selectedIconPath": "pages/images/tabBar/group_1.png",
+        "text": "团购活动"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "iconPath": "pages/images/tabBar/mine_2.png",
+        "selectedIconPath": "pages/images/tabBar/mine_1.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "位置获取"
+    }
+  },
+  "usingComponents": {
+    "vpush-view": "/vpush-pro-sdk/components/view",
+    "vpush-checkin": "/vpush-pro-sdk/components/checkin"
+  },
+  "sitemapLocation": "sitemap.json"
+}

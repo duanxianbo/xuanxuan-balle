@@ -1,0 +1,124 @@
+<!--index.wxml-->
+<vpush-checkin 
+title='获取推送权限'
+desc='获取下次的推送'
+bind:onCheckIn="checkInHandler"
+/>
+
+
+<image src='http://wx4.sinaimg.cn/mw690/006p6Tvely1g3kcs566lyj33oc5wo4qv.jpg' class='background' mode='aspectFit'/>
+
+<image src='/pages/images/about.png' class='about' mode="widthFix" bindtap='toAbout'></image>
+
+
+<image src='/pages/images/picture.png' class='picture' mode="widthFix" bindtap='toPhoto'></image>
+
+<image src='/pages/images/video.png' class='video' mode="widthFix"
+bindtap='toVideo'></image>
+
+<image src='/pages/images/schedule.png' class='schedule' mode="widthFix" bindtap="toVisual"></image>
+
+<image src='/pages/images/yearCard.png' class='yearCard' mode="widthFix" bindtap="yearCard"></image>
+
+<!-- <scroll-view  scrollY="true"> -->
+<!-- <view class="container">
+<view class='left_word'>
+  <text class='title'>美哚舞蹈</text>
+  <text class='sub-title'>教育学校.培训</text>
+</view> -->
+
+
+<!-- 
+<view>
+<image class='logo' src='/pages/images/logo1.png' mode="Fixwidth"></image>
+</view>
+</view> -->
+
+<!-- 
+<view class='block1' bindtap='intoMap'>
+    <view style='width:90%;'>
+      <icon class='iconfont icon-dizhi'></icon>
+      <text space='ensp'> 北京CCD创意港嘉悦广场6号楼303</text>
+    </view>
+    <view class='array_position'>
+      <icon class='iconfont icon-jiantouyou'></icon>
+    </view>
+</view>
+
+<view class='block1'>
+    <view style='width:90%;'>
+      <icon class='iconfont icon-shijian'></icon>
+      <text space='ensp'> 10:00-21:00</text>
+    </view>
+</view>
+
+<view class='block1'  bindtap='Call'>
+    <view style='width:90%;'>
+      <icon class='iconfont icon-shouji'></icon>
+      <text space='ensp'> 18612257539</text>
+    </view>
+    <view class='array_position'>
+      <icon class='iconfont icon-jiantouyou'></icon>
+    </view>
+</view> -->
+
+
+
+<!-- <view class='block1' bindtap='toVideo'>
+    <view style='width:90%;'>
+      <icon class='iconfont icon-icon-'></icon>
+      <text space='ensp'> 往期视频</text>
+    </view>
+    <view class='array_position'>
+      <icon class='iconfont icon-jiantouyou'></icon>
+    </view>
+</view> -->
+
+
+<!-- <view class='block1' bindtap='toVisual'>
+    <view style='width:90%;'>
+      <icon class='iconfont icon-yuyue'></icon>
+      <text space='ensp'> 视听课预约</text>
+    </view>
+    <view class='array_position'>
+      <icon class='iconfont icon-jiantouyou'></icon>
+    </view>
+</view> -->
+
+
+<!-- <view class='block1' bindtap='toPhoto'>
+    <view style='width:90%;'>
+      <icon class='iconfont icon-tupian'></icon>
+      <text space='ensp'> 门店照片</text>
+    </view>
+    <view class='array_position'>
+      <icon class='iconfont icon-jiantouyou'></icon>
+    </view>
+</view> -->
+
+
+<!-- <view class='block1' bindtap='yearCard'>
+    <view style='width:90%;'>
+      <icon class='iconfont icon-huobiduihuan'></icon>
+      <text space='ensp'> 年卡办理</text>
+    </view>
+    <view class='array_position'>
+      <icon class='iconfont icon-jiantouyou'></icon>
+    </view>
+</view> -->
+
+
+<!-- <view class='picture;'>
+    <image wx:for="{{pictures}}" wx:key="unique" src="{{item}}" style="width:50%;height:{{item.height}}px" bindtap="previewImage" data-index="{{index}}" mode='widthFix'></image>
+</view> -->
+
+
+<!-- <view style='height:50rpx;'></view> -->
+
+
+
+
+
+
+
+<!-- </scroll-view> -->

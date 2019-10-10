@@ -1,0 +1,18 @@
+/* pages/photo/photo0.wxss */
+.title{
+  left:30rpx;
+  width: 95%;
+  align-content: center;
+  justify-items: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.video{
+	width: 650rpx;
+  margin: 10rpx 0rpx;
+  z-index: 1;
+}

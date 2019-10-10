@@ -1,0 +1,49 @@
+ <view class="container">
+ <view class='top'>
+<image src='/pages/images/schedule_top.png' mode="widthFix" class='top-image'></image>
+</view>
+
+
+<view class='txt'>
+欢迎体验团购活动（每人限购一次！）
+</view>
+
+
+
+	<view class="content-container">
+
+<view style='width:200rpx;'></view>
+
+		<view class="goods-container"  >
+
+				<view class="goods" wx:for="{{goods}}" wx:for-index="idx" wx:key="key">	
+
+            <view class='item'>
+                  <image src='http://wx2.sinaimg.cn/mw690/006p6Tvely1g3coh3tepgj30rh0f4wed.jpg' class='pic2' mode='scaleToFill'/>
+                 <image src="{{item.image}}" class='pic1' mode='widthFix'/> 
+                 <!-- <image src='http://wx2.sinaimg.cn/mw690/006p6Tvely1g3crdgpx5mj30r507ndk9.jpg' class='pic1' mode='widthFix'/> -->
+
+                  <view class='name'>{{item.name}}</view>
+                 
+                  <view class='methods'>
+                        <view class='price'> 单人价: ￥{{item.price}} </view>
+                        <view style='width:100rpx'></view>
+                        <view class='price'>  团购价: ￥{{item.price2}} </view>
+                  </view>
+
+                  <view class='methods1'>
+                    <view class="btn" bindtap='toPay' data-id="{{idx}}">单人购买 </view>
+                    <view style='width:100rpx;'></view>
+                    <view  class="btn" bindtap='toGroupBuy' data-id="{{item.price2}}" data-name="{{item.name}}" data-number="{{item.group_num}}">需{{item.group_num}}人成团</view>
+                  </view>
+
+            </view>
+
+        </view>
+
+		</view>
+
+
+	</view>
+
+</view>

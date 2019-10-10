@@ -1,0 +1,5 @@
+<!--pages/video/video1.wxml-->
+
+<view class='content'>
+      <video src='{{videUrl}}' class='content' ></video>
+</view>

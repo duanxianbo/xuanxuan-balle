@@ -1,0 +1,9 @@
+/* pages/others/waterfall/waterfall.wxss */
+
+
+.img_item{
+width: 100%;
+margin: 1%;
+display: inline-block;
+vertical-align: top;
+}

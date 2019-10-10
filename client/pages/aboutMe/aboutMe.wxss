@@ -1,0 +1,48 @@
+/* pages/aboutMe/aboutMe.wxss */
+
+.whole{
+  width: 95%;
+  margin-left: 20rpx;
+  align-content: center;
+  justify-content: center;
+}
+.right{
+  display: flex;
+  justify-content:flex-end;
+}
+
+.head{
+  display: flex;
+  position: relative;
+  height: 200rpx;
+}
+.text{
+  left: 30rpx;
+  width: 90%;
+  display: flex;
+  color: gray;
+  text-align: justify;
+  position: relative;
+  flex-direction: column;
+}
+
+.bar{
+  display: flex;
+  position: relative;
+  height: 10rpx;
+  margin: 20rpx 0rpx;
+}
+
+.title{
+  width: 350rpx;
+  position: absolute;
+  left: 40rpx;
+  top: 40rpx;
+}
+
+.about_pic{
+  width: 150rpx;
+  position: absolute;
+  right: 40rpx;
+  top: 40rpx;
+}

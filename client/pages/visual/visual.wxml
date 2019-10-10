@@ -1,0 +1,130 @@
+<!--pages/visual/visual.wxml-->
+
+
+
+<view class='top'>
+<image src='/pages/images/schedule_top.png' mode="widthFix" class='top-image'></image>
+</view>
+
+<view class='whole'>
+
+<view class='txt'>
+请输入您的预约信息：
+</view>
+
+
+ <form bindsubmit="formSubmit" bindreset="formReset" report-submit='true'>
+
+        <view class="inputView">
+        <image src='/pages/images/schedule_block.png' class='image_block'></image>
+        <view style='width:40%'>
+          <label class="loginLab">姓名：</label>
+        </view>
+        <view style='width:60%'>
+          <input type="input-text" name="username" class="inputText" placeholder="点击输入您的名字" placeholder-class='placeholder'/>
+        </view>
+        </view>
+
+       
+        <view class="inputView">
+        <image src='/pages/images/schedule_block.png' class='image_block'></image>
+        <view style='width:40%'>
+          <label class="loginLab">小名：</label>
+        </view>
+        <view style='width:60%'>
+          <input type="input-text" name="smallName"  class="inputText" placeholder="点击输入您的小名" placeholder-class='placeholder'/>
+        </view>
+        </view>
+
+        <view class="inputView">
+        <image src='/pages/images/schedule_block.png' class='image_block'></image>
+        <view style='width:40%'>
+          <label class="loginLab">预约电话：</label>
+        </view>
+        <view style='width:60%'>
+          <input type="input-text" name="phone"  class="inputText" placeholder="点击输入您的电话" placeholder-class='placeholder'/>
+        </view>
+        </view>
+
+
+
+
+
+        <view class="inputView">
+        <image src='/pages/images/schedule_block.png' class='image_block'></image>
+        <view style='width:40%'>
+          <label class="loginLab">出生日期：</label>
+        </view>
+        <picker mode="date" bindchange="bindDateChange2" value="{{date2}}" range="{{array}}" class='input-text' name="age" start="1994-01-01" end="2019-09-01" >
+        <view > {{date2}}</view>
+         </picker>
+
+        </view>
+
+
+
+        <view class="section section_gap">
+            <view class="title">性别:</view>
+             <view style="width:90rpx"></view>
+            <view class='form-group'>
+                <radio-group name="gender">
+                  <label style='margin-right:80rpx'><radio value="1"/>男</label>
+                  <label ><radio value="0"/>女</label>
+                </radio-group>
+            </view>    
+        </view>
+
+        <view class="txt">
+        请输入您的预约信息:
+        </view>
+
+
+        <view class='form_date'>
+        <view class='form-group'>
+         <picker mode="date" value="{{date}}" start="2019-01-01" end="2022-09-01" bindchange="bindDateChange" name="date">
+            <view class="picker2">
+              <view style='width:30rpx;'></view>选择日期:<view style='width:100rpx'></view> {{date}}
+            </view>
+        </picker>         
+        </view>
+        <image src='/pages/images/schedule_block.png' class='image_block1'></image>
+        </view>
+     
+
+
+<view style='height:200rpx;'></view>
+
+        <view class="button">
+
+            <button size='mini' formType="submit" class='share'> 
+            <!-- <button class='btn'  mod="widthFix"  formType="submit">提交</button> -->
+            <image src='/pages/images/submit.png' mode='widthFix'  class='submit_image'></image>
+            </button>
+            <button size='mini' formType="reset">清空</button>
+        </view>
+    </form>
+ 
+     
+    <toast hidden="{{toast1Hidden}}" bindchange="toast1Change">
+        {{notice_str}}
+    </toast>
+    
+    <vpush-view>
+    <view class="page__bd">
+        <modal title="确认" confirm-text="确定" cancel-text="取消" hidden="{{modalHidden}}" mask bindconfirm="confirm_one" bindcancel="cancel_one">
+            确认提交么？
+        </modal>
+        <modal class="modal" hidden="{{modalHidden2}}" no-cancel bindconfirm="modalChange2" bindcancel="modalChange2">
+            <view> 提示 </view>
+            <view> 清空成功 </view>
+        </modal>
+    </view>
+    </vpush-view> 
+
+</view>
+
+<view class='bottom'>
+<image class='bottom-image' src='http://wx1.sinaimg.cn/mw690/006p6Tvely1g3kd7uxtg0j33kt1tv4qr.jpg' mode="widthFix"></image>
+</view>
+
+

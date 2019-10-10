@@ -1,0 +1,24 @@
+<!--pages/mine/order.wxml-->
+<view  class='table'>
+  <view class='tr'>
+      <!-- <view class='th'>订单号</view> -->
+      <view class='th'>商品名</view>
+      <view class='th'>价格</view>
+       <view class='th'>购买时间</view>
+      <view class='th'></view>
+  </view>
+  <view wx:for="{{user}}">
+  <view class='tr'>
+    <!-- <view class='td'> {{item.mct_id}}</view> -->
+    <view class='td'> {{item.mct_name}}</view>
+    <view class='td'> {{item.price}}元</view>
+    <view class='td'> {{item.time}}</view>
+    <view class='td1' data-id="{{item.mct_id}}" data-price="{{item.price}}" data-mct_name="{{item.mct_name}}" data-time="{{item.time}}" data-name="{{item.name}}" data-phone="{{item.phone}}" bindtap='toOrder' data-number="{{item.number}}">   查看</view>
+  </view>
+  </view>
+   
+</view>
+
+  <view class='bottom'>
+<image class='bottom-image' src='http://wx1.sinaimg.cn/mw690/006p6Tvely1g3kidob5vmj33kt3glhdv.jpg' mode="widthFix"></image>
+</view>

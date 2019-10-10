@@ -1,0 +1,8 @@
+<!--pages/video/video.wxml-->
+
+  <view wx:for="{{tab}}" class='title' bindtap='toVideoSum' data-vid="{{item.vid}}">
+   <image src='{{item.image}}' class='picture'  mode='widthFix'/>
+   <image src='/pages/images/video_block.png' class='video'></image>
+    <view style='width:90%'  class='text' > {{item.name}}</view>
+  </view>
+

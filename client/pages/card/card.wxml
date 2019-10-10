@@ -1,0 +1,26 @@
+<!--pages/card/card.wxml-->
+<view class="title_color">
+<view class='cont'>
+<!-- 头像 -->
+<image class='list_img' src='{{image}}'></image>
+</view>
+
+ <!-- <button class='btn_sub' bindgetuserinfo='btn_sub' open-type="getUserInfo" bindtap='tap'>{{tag}}</button> -->
+
+<view>亲爱的{{name}}，您已坚持打卡{{duration}}天</view>
+</view>
+
+<view style='height:50rpx;'></view>
+
+
+<view class='content'>
+      <video src='{{videUrl}}' class='content' ></video>
+</view>
+
+
+<view style='height:200rpx;'></view>
+<view class='countDown'>倒计时：<text style='color:red'>{{countDownNum}}</text>s</view>
+
+<view class='imagesize'> 
+<image src="{{flag==true ? '../images/card1.png' : '../images/card2.png'}}" class='card' bindtap="changeDate"></image>
+</view>

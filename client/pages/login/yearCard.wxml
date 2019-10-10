@@ -1,0 +1,36 @@
+<!--pages/login/login2.wxml-->
+<scroll-view scroll-x="true">
+<view  class='table'>
+  <view class='title'>
+      <view class='th'>课程名</view>
+      <view class='th'>描述</view>
+      <view class='th'>单价 </view>
+      <view class='th'>图片 </view>
+       <view class='th'> </view>
+  </view >
+  <view class='title' wx:for="{{tab}}" wx:for-index="index" >
+          <view class='th'> {{item.name}}</view>
+          <view class='th'> {{item.descrp}}</view>
+          <view class='th'> {{item.price}}</view>
+          <view class='th'> 隐藏</view>
+          <view class="th"><button bindtap='delUser' data-name="{{item.name}}" style='color:blue;'>删除</button></view>
+  </view>
+    <view class='title'>
+      <input class='th' placeholder="课程" bindinput="add1" value="{{name}}"></input>
+      <input class='th' placeholder="描述"  bindinput="add2" value="{{descrp}}"></input>
+      <input class='th' placeholder="价格" bindinput="add3" value="{{price}}"></input>
+      <input class='th' placeholder="图片" bindinput="add4" value="{{img}}"></input>
+      <view class='th'></view>
+      <view class='th' bindtap='addUser' style='color:blue;'>增加</view>
+      <view class='th'></view>
+  </view >
+   
+</view>
+
+
+<view style='height:100rpx'></view>
+
+
+<button bindtap='comBack' class='btn'>点击返回</button>
+<view style='height:20rpx'></view>
+</scroll-view>

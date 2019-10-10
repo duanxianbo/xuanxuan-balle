@@ -1,0 +1,33 @@
+/* pages/schedule/schedule.wxss */
+
+.table{
+  border: 2rpx solid #dadada;
+  border-right: 0;
+  border-bottom: 0;
+  width:180%;
+}
+
+.tr{
+  widows: 100%;
+  display: flex;
+  background-color: blue;
+  color: white;
+  justify-content:space-between;
+  align-content: center;
+}
+
+.th,.td{
+  padding: 10rpx;
+  border-bottom: 1rpx solid #dadada;
+  border-right: 1rpx solid #dadada;
+  text-align: center;
+  width: 300rpx;
+  justify-content: center;
+  justify-items: center;
+}
+
+.th{
+  font-weight: 400;
+  
+  
+}

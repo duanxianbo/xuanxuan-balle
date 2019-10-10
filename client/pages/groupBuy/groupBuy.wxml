@@ -1,0 +1,59 @@
+
+
+        <!-- list start -->
+
+             <view class="hot-item-top">
+                <view class="hot-img">
+                    <image src="{{goodsImg}}" mode='widthFix'></image>
+                </view>
+
+                <view class="hot-item-top-right">
+                    <text class="hot-item-title">{{mct_name}}</text>
+                    <view class="hot-item-price">0/{{SumGroup}} 人拼团</view>
+  
+                </view>
+            </view>
+            
+            <view class="hot-item-btm">
+                <view class="hot-item-user-box">
+                    <view wx:for="{{lists.user}}" wx:key="" class="hot-item-user-img">
+                        <image src="{{item.userImg}}" mode="widthFix"></image>
+                    </view>
+                </view>
+                <text class="hot-item-btn" bindtap='pay'>参与</text>
+            </view>
+
+
+ <form bindsubmit="formSubmit" bindreset="formReset" report-submit='true'>
+
+        <view class="inputView">
+        <image src='/pages/images/schedule_block.png' class='image_block'></image>
+        <view style='width:40%'>
+          <label class="loginLab">姓名：</label>
+        </view>
+        <view style='width:60%'>
+          <input type="input-text" name="username" class="inputText" placeholder="点击输入您的名字" placeholder-class='placeholder' bindinput='changeName'/>
+        </view>
+        </view>
+
+        <view class="inputView">
+        <image src='/pages/images/schedule_block.png' class='image_block'></image>
+        <view style='width:40%'>
+          <label class="loginLab">预约电话：</label>
+        </view>
+        <view style='width:60%'>
+          <input type="input-text" name="phone"  class="inputText" placeholder="点击输入您的电话" placeholder-class='placeholder' bindinput='changePhone'/>
+        </view>
+        </view>     
+
+    </form>
+
+<button  wx:if="{{flag==false}}" bindgetuserinfo='btn_sub' open-type="getUserInfo" bindtap='btn_sub' class='btn'>点击登录
+</button>
+
+<button bindtap='onShareAppMessage' open-type='share' class="btn">分享给好友</button>
+
+  <view class='bottom'>
+<image class='bottom-image' src='http://wx4.sinaimg.cn/mw690/006p6Tvely1g3kidq6wljj33kt3a4kjn.jpg' mode="widthFix"></image>
+</view>
+

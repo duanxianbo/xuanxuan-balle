@@ -1,0 +1,46 @@
+<view>
+    <scroll-view scroll-y="true" bindscrolltolower="loadList" class="layout">
+
+        <!-- list start -->
+
+             <view class="hot-item-top">
+                <view class="hot-img">
+                    <image src="{{lists.goodsImg}}"></image>
+                </view>
+
+                <view class="hot-item-top-right">
+                    <text class="hot-item-title">{{mct_name}}</text>
+                    <view class="hot-item-price">{{groupSize}}/{{SumGroup}} 人拼团</view>
+  
+                </view>
+            </view>
+            
+            <view class="hot-item-btm" >
+                <view class="hot-item-user-box">
+                    <view wx:for="{{user}}" wx:key="" class="hot-item-user-img">
+                        <image src="{{item}}" mode="widthFix"></image>
+                    </view>
+                </view>
+                <text class="hot-item-btn" bindtap='pay' wx:if="{{mem_flag==true}}">参与</text>
+            </view>
+
+
+<view wx:if="{{mem_flag==true && flag==false}}">请登陆后参与拼团或分享给好友</view>
+
+<button  bindgetuserinfo='btn_sub' open-type="getUserInfo" bindtap='btn_sub' class='btn' wx:if="{{mem_flag==true && flag==false}}">点击登录
+</button>
+
+
+
+<button bindtap='onShareAppMessage' open-type='share' class="btn" wx:if="{{mem_flag==true && flag==true}}">分享给好友</button>
+
+<view wx:elif="{{mem_flag==false}}" class='finish' style='color:red'> 订单已完成</view>
+<view wx:if="{{mem_flag==false}}" class='finish'> 订单发起人: {{name}}</view>
+<view wx:if="{{mem_flag==false}}" class='finish'> 电话: {{phone}}</view>
+<view wx:if="{{mem_flag==false}}" class='finish'> 订单编号: {{mct_id}}</view>
+<view wx:if="{{mem_flag==false}}" class='finish'> 价格: {{txtOrderCode}}元</view>
+
+<button bindtap='toPurchase' class="btn">返回我的订单</button>
+
+    </scroll-view>
+</view>

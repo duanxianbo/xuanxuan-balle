@@ -1,0 +1,18 @@
+<!--pages/class/class.wxml-->
+
+<!-- <web-view src="https://mp.wexin.qq.com/"></web-view> -->
+
+<view  class='table'>
+  <view class='tr'>
+      <view class='th'>姓名</view>
+      <view class='th'>性别</view>
+      <view class='th'>剩余课时</view>
+  </view >
+  <view wx:for="{{tab}}" class='tr'>
+    <view class='td'> {{item.name}}</view>
+    <view class='td'> {{item.sex}}</view>
+    <view class='td'> {{item.age}}</view>
+  </view>
+   
+</view>
+

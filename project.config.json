@@ -1,0 +1,19 @@
+{
+	"client": "client/",
+	"svr": "server/",
+	"miniprogramRoot": "client/",
+	"qcloudRoot": "server/",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"appid": "wx158a051ad1abcd07",
+	"projectname": "Balle-dynamics",
+	"libVersion": "2.6.5",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {}
+}

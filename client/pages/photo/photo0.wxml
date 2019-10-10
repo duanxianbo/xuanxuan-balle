@@ -1,0 +1,6 @@
+<!--pages/photo/photo0.wxml-->
+  <view class="title">
+   <image src='http://wx1.sinaimg.cn/mw690/006p6Tvely1g3guanld9vj30o50cj7fi.jpg' class='video' mode='widthFix' bindtap='toPhoto1'></image>
+      <image src='http://wx1.sinaimg.cn/mw690/006p6Tvely1g3guao0dhdj30o50cjtgp.jpg' class='video' mode='widthFix'  bindtap='toPhoto2'></image>
+    <image src='http://wx2.sinaimg.cn/mw690/006p6Tvely1g3guaoe9njj30o50cjti7.jpg' class='video' mode='widthFix'  bindtap='toPhoto3'></image>
+   </view>

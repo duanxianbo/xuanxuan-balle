@@ -1,0 +1,36 @@
+<!--pages/mine/mine.wxml-->
+
+
+<view class='head-pic' wx:if="{{flag==true}}">
+    <image src="{{userInfo.avatarUrl}}" class='pic'></image>
+</view>
+
+<view class='head-pic' wx:elif="{{flag==false}}">
+    <image src="/pages/images/name.png" class='pic'></image>
+</view>
+
+<view class='head-txt' wx:if="{{flag==true}}">
+  {{userInfo.nickName}} 
+</view>
+<view class='head-txt' wx:elif="{{flag==false}}">
+  NAME 
+</view>
+
+
+<button  bindgetuserinfo='btn_sub' open-type="getUserInfo" bindtap='btn_sub' class='btn' wx:if="{{flag==false}}">  请点击登录
+</button>
+<button class='btn' wx:elif="{{flag==true}}"> 已登录
+</button>
+
+<image src='/pages/images/my_group.png' bindtap="mineGroup" class='mine' mode="widthFix"/>
+<image src='/pages/images/my_order.png' bindtap="mineOrder" class='mine' mode="widthFix"/>
+<image src='/pages/images/my_card.png' bindtap="mineYearCard" class='mine' mode="widthFix"/>
+
+
+
+  <view class='bottom'>
+<image class='bottom-image' src='http://wx1.sinaimg.cn/mw690/006p6Tvely1g3kd7uxtg0j33kt1tv4qr.jpg' mode="widthFix"></image>
+</view>
+
+
+

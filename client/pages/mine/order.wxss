@@ -1,0 +1,49 @@
+/* pages/mine/group.wxss */
+
+.table{
+  border: 2rpx solid #dadada;
+  border-right: 0;
+  border-bottom: 0;
+  width:98%;
+}
+
+.tr{
+  widows: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.th,.td{
+  padding: 10rpx;
+  border-bottom: 1rpx solid #dadada;
+  border-right: 1rpx solid #dadada;
+  text-align: center;
+  width: 100%;
+}
+
+.th,.td1{
+  padding: 10rpx;
+  color: blue;
+  border-bottom: 1rpx solid #dadada;
+  border-right: 1rpx solid #dadada;
+  text-align: center;
+  width: 100%;
+}
+
+
+.th{
+  font-weight: 400;
+  
+}
+ .bottom{
+bottom: 0rpx;
+width: 100%;
+display: flex;
+position: absolute;
+z-index: -1;
+}
+
+.bottom-image{
+  width: 100%;
+
+}

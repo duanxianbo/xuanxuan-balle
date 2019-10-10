@@ -1,0 +1,22 @@
+<!--pages/mine/group.wxml-->
+<view  class='table'>
+  <view class='tr'>
+      <!-- <view class='th'>订单号</view> -->
+      <view class='th'>商品名</view>
+      <view class='th'>价格</view>
+       <view class='th'></view>
+  </view>
+  <view wx:for="{{user}}">
+  <view class='tr'>
+    <!-- <view class='td'> {{item.mct_id}}</view> -->
+    <view class='td'> {{item.mct_name}}</view>
+    <view class='td'> {{item.price}}元</view>
+    <view class='td1' data-id="{{item.mct_id}}" data-price="{{item.price}}" data-mct_name="{{item.mct_name}}" bindtap='toGroupBuy' data-number="{{item.number}}" data-name="{{item.name}}" data-phone="{{item.phone}}">   查看</view>
+  </view>
+  </view>
+   
+</view>
+
+  <view class='bottom'>
+<image class='bottom-image' src='http://wx2.sinaimg.cn/mw690/006p6Tvely1g3kidmm9rdj33kt3bshdv.jpg' mode="widthFix"></image>
+</view>
