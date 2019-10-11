@@ -128,7 +128,7 @@ Page({
   // 登录
   login: function () {
 
-    if (this.data.phone == 'class' && this.data.password == 'meiduo2019') {
+    if (this.data.phone == '1' && this.data.password == '1') {
       wx.navigateTo({
         url: '/pages/login/login2',
       })

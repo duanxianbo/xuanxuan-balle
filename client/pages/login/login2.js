@@ -1,22 +1,24 @@
+
 // pages/login/login2.js
-var app=getApp()
+var app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    myarrary:[],
+    myarrary: [],
     tab: [],
     hiddenmodalput: true,
-    change_info:[],
+    change_info: [],
     new_class: "",
-    user:"",
-    passwd:"",
-    course:"",
-    name:"",
-    initial:"",
-    openId:'',
+    user: "",
+    passwd: "",
+    course: "",
+    name: "",
+    initial: "",
+    waste: "",
+    new_waste: ""
 
   },
 
@@ -24,24 +26,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that=this
-    // console.log(JSON.stringify(options))
-    // console.log(Object.keys(options).length)
-    if (JSON.stringify(options)=='{}' || options==undefined){
-      this.setData({
-          openId: 'oBiQ-5U7MRFe6wRTt5ij35A3RNkA'
-      })
-    }else{
-      this.setData({
-          openId: options.openId
-      })
-    }
-    console.log(this.data.openId)
-
-     var myarray=new Array(100);
-     this.setData({
-        myarray:myarray,
-     })
+    var myarray = new Array(100);
+    this.setData({
+      myarray: myarray
+    })
     console.log(this.data.myarray.length)
 
     var that = this
@@ -54,13 +42,14 @@ Page({
       },
       success: function (res) {
         var tab = res.data.data.msg
-        // console.log(tab)
+        console.log(tab)
         that.setData({
           tab: tab
-        })  
-      }
-    })
+        })
 
+      }
+
+    })
   },
 
 
@@ -70,7 +59,15 @@ Page({
       new_class: val
     });
 
-  },  
+  },
+
+  getCode2: function (e) {
+    var val = e.detail.value;
+    this.setData({
+      new_waste: val
+    });
+
+  },
 
   add1: function (e) {
     var val = e.detail.value;
@@ -82,7 +79,7 @@ Page({
   add2: function (e) {
     var val = e.detail.value;
     this.setData({
-      passwd:val
+      passwd: val
     });
 
   },
@@ -90,7 +87,7 @@ Page({
   add3: function (e) {
     var val = e.detail.value;
     this.setData({
-      name:val
+      name: val
     });
 
   },
@@ -98,15 +95,23 @@ Page({
   add4: function (e) {
     var val = e.detail.value;
     this.setData({
-      course:val
+      course: val
     });
 
   },
 
-  addUser:function(e){
+  add5: function (e) {
+    var val = e.detail.value;
+    this.setData({
+      waste: val
+    });
 
-    var that=this
-    console.log({ user: this.data.user, passwd: this.data.passwd, name: this.data.name, class: this.data.course })
+  },
+
+  addUser: function (e) {
+
+    var that = this
+    console.log({ user: this.data.user, passwd: this.data.passwd, name: this.data.name, class: this.data.course, waste: this.data.waste })
     wx.request({
       url: 'https://104724433.xuanxuanballe.club/weapp/form_add',
       // url: 'https://rv647fej.qcloud.la/weapp/form',
@@ -116,7 +121,7 @@ Page({
         //  'Content-Type': 'application/json'
       },
 
-      data: { user: this.data.user, password:this.data.passwd,name:this.data.name,class: this.data.course ,openId:""},
+      data: { user: this.data.user, password: this.data.passwd, name: this.data.name, class: this.data.course, openId: "", waste: this.data.waste },
 
       success: function (res) {
         console.log(res)
@@ -146,9 +151,11 @@ Page({
     })
     this.setData({
       new_class: "",
+      new_waste: "",
       user: "",
       passwd: "",
       course: "",
+      waste: "",
       name: ""
     })
 
@@ -157,7 +164,7 @@ Page({
 
   delUser: function (e) {
     var user = e.target.dataset.name
-    var that=this
+    var that = this
     wx.request({
       url: 'https://104724433.xuanxuanballe.club/weapp/form_del',
       // url: 'https://rv647fej.qcloud.la/weapp/form',
@@ -167,7 +174,7 @@ Page({
         //  'Content-Type': 'application/json'
       },
 
-      data: { user: user},
+      data: { user: user },
 
       success: function (res) {
 
@@ -204,7 +211,7 @@ Page({
   createTable: function (e) {
 
     var that = this
-    var tab=this.data.tab
+    var tab = this.data.tab
     var list = JSON.stringify(this.data.tab);
     console.log('tab in table')
     console.log(tab)
@@ -217,7 +224,7 @@ Page({
         //  'Content-Type': 'application/json'
       },
 
-      data: { tab:list } ,
+      data: { tab: list },
 
       success: function (res) {
         console.log(res)
@@ -246,10 +253,12 @@ Page({
 
     })
     this.setData({
+      new_waste: "",
       new_class: "",
       user: "",
       passwd: "",
       course: "",
+      waste: "",
       name: ""
     })
 
@@ -259,23 +268,25 @@ Page({
 
 
 
-  
-  
+
+
   changeUser: function (e) {
 
-    var user = e.currentTarget.dataset.name 
+    var user = e.currentTarget.dataset.name
     var pwd = e.currentTarget.dataset.pwd
     var openId = e.currentTarget.dataset.openid
+    var waste = e.currentTarget.dataset.waste
 
     console.log('user=' + user)
-    console.log('pwd='+pwd)
+    console.log('pwd=' + pwd)
     console.log('openId=' + openId)
 
-   var that=this
-    var val =this.data.new_class
-    
+    var val = this.data.new_class
+    var val2 = this.data.new_waste
+    console.log(val)
+    console.log(val2)
     // this.data.change_info.push({ user, val })
-   
+
     // console.log(this.data.change_info)
 
     wx.request({
@@ -286,11 +297,10 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded'
         //  'Content-Type': 'application/json'
       },
-     
-      data: { user: user, class:val },
+
+      data: { user: user, class: val, waste: val2 },
       success: function (res) {
         console.log(res)
-        console.log('res1')
         if (res.data.status == 0) {
           wx.showToast({
             title: res.data.info,
@@ -298,7 +308,7 @@ Page({
             duration: 1500
           })
         } else {
-    
+
           wx.showToast({
             title: '提交成功',
             icon: "success",
@@ -311,43 +321,22 @@ Page({
 
         }
 
-        console.log('finish 1')
-        wx.request({
-          url: 'https://wx158a051ad1abcd07.mssnn.cn/v2/api/vpush?id=2',
-          method: 'POST',
-          dataType: 'json',
-          header: {
-            'Content-Type': "application/json",
-          },
-          data: {
-            "secret": "a42aa-3d520-7b100-28e2b",
-            "path": "pages/login/login1?user="+user+"&pwd="+pwd, 
-            // 这里填写管理员的openId
-            "openId": openId,
-            "data": [
-              user,
-              val, ]
-          },
-          success: function (res) {
-            console.log(res)
-            console.log('res2')
-          }
-        })
-
 
 
       }
-  })
+    })
     this.setData({
       new_class: "",
+      new_waste: "",
       user: "",
       passwd: "",
       course: "",
+      waste: "",
       name: "",
       initial: ""
     })
   },
-  
+
 
   serviceSelection() {
     wx.showToast({
@@ -360,11 +349,11 @@ Page({
 
 
 
-comBack:function(){
-wx.navigateTo({
-  url: '/pages/index/index',
-})
-},
+  Back: function () {
+    wx.navigateTo({
+      url: '/pages/index/index',
+    })
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -2,10 +2,8 @@
 
 <view style="width:95%;left:13rpx;position:relative">
   <view class="img_item">
-    <view  >
     <image wx:for="{{pictures}}" wx:key="unique" src="{{item.URL}}" style="width:50%;height:{{item.height}}px" bindtap="previewImage" data-index="{{index}}" mode='aspectFill'></image>
-    </view>
-    </view>
+  </view>
 
 
 </view>

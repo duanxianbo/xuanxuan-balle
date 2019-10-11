@@ -2,33 +2,37 @@
 <scroll-view scroll-x="true">
 <view  class='table'>
   <view class='title'>
-      <view class='th'>编号</view>
-      <view class='th'>用户</view>
-      <view class='th'>密码</view>
-      <view class='th'>姓名</view>
-      <view class='th'>剩余课时</view>
-      <view class='th'>修改学时 </view>
-      <view class='th'>修改</view>
-      <view class='th'>删除</view>
+      <view class='th1'>编号</view>
+      <view class='th3'>用户</view>
+      <view class='th3'>密码</view>
+      <view class='th3'>姓名</view>
+      <view class='th1'>剩余课时</view>
+      <view class='th1'>已耗课时</view>
+      <view class='th2'>修改学时</view>
+      <view class='th2'>修改已耗</view>
+      <view class='th1'>修改</view>
+      <view class='th1'>删除</view>
   </view >
-  <view class='title' wx:for="{{tab}}" wx:for-index="index" >
-    <view class='th'> {{index+1}}</view>
-    <view class='th'> {{item.user}}</view>
-    <view class='th'> {{item.password}}</view>
-    <view class='th'> {{item.name}}</view>
-    <view class='th'> {{item.class}}</view>
-    <input type="number" placeholder="新学时" class="th" bindinput="getCode1" value="{{initial}}"/>
-    <view class="th"><button  bindtap="changeUser" data-name="{{item.user}}" data-pwd="{{item.password}}" data-openid="{{item.openId}}" style='color:blue;' >修改</button></view>
-    <view class="th"><button bindtap='delUser' data-name="{{item.user}}" style='color:blue;'>删除</button></view>
+  <view class='tr' wx:for="{{tab}}" wx:for-index="index" >
+    <view class='td1'> {{index+1}}</view>
+    <view class='td3'> {{item.user}}</view>
+    <view class='td3'> {{item.password}}</view>
+    <view class='td3'> {{item.name}}</view>
+    <view class='td1'> {{item.class}}</view>
+    <view class='td1'> {{item.waste}}</view>
+    <input type="number" placeholder="新学时" class="td2" bindinput="getCode1" value="{{initial}}"/>
+    <input type="number" placeholder="新已耗" class="td2" bindinput="getCode2" value="{{initial}}"/>
+    
+    <view class="td1"><button  bindtap="changeUser" data-name="{{item.user}}" data-pwd="{{item.password}}" data-openid="{{item.openId}}" data-waste="{{item.waste}}" style='color:blue;font-size:36rpx;' >修改</button></view>
+    <view class="td1"><button bindtap='delUser' data-name="{{item.user}}" style='color:blue;font-size:36rpx;'>删除</button></view>
   </view>
     <view class='title'>
-      <input class='th' placeholder="用户" bindinput="add1" value="{{user}}"></input>
-      <input class='th' placeholder="密码"  bindinput="add2" value="{{passwd}}"></input>
-      <input class='th' placeholder="姓名" bindinput="add3" value="{{name}}"></input>
-      <input class='th' placeholder="剩余课时" bindinput="add4" value="{{course}}"></input>
-      <view class='th'></view>
-      <view class='th' bindtap='addUser' style='color:blue;'>增加</view>
-      <view class='th'></view>
+      <input class='th3' placeholder="用户" bindinput="add1" value="{{user}}"></input>
+      <input class='th3' placeholder="密码"  bindinput="add2" value="{{passwd}}"></input>
+      <input class='th3' placeholder="姓名" bindinput="add3" value="{{name}}"></input>
+      <input class='th3' placeholder="剩余课时" bindinput="add4" value="{{course}}"></input>
+      <input class='th3' placeholder="已耗课时" bindinput="add5" value="{{waste}}"></input>
+      <view class='th3' bindtap='addUser' style='color:blue;width:25%;'>增加</view>
   </view >
    
 </view>
@@ -37,21 +41,10 @@
 <view style='height:100rpx'></view>
 
 
-<vpush-view bindtap="serviceSelection">
-<button class='btn'>获取推送权限
-<view wx:for="{{array}}">
-
-<text>
-获取推送权限
-</text>
-
-</view>
-</button>
-</vpush-view>
 
 <view style='height:50rpx'></view>
 <button bindtap='createTable' class='btn'>点击存档</button>
 <view style='height:20rpx'></view>
-<button bindtap='comBack' class='btn'>点击返回</button>
+<button bindtap='Back' class='btn'>点击返回</button>
 <view style='height:20rpx'></view>
 </scroll-view>

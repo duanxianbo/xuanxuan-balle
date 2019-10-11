@@ -42,6 +42,7 @@ Page({
   onLoad: function (options) {
     var id=options.id
     var that = this
+    var pic_type = ['环境', "课堂", "活动"]
     wx.request({
       // url: 'https://rv647fej.qcloud.la/weapp/picture',
       url: 'https://104724433.xuanxuanballe.club/weapp/picture',
@@ -52,23 +53,9 @@ Page({
       success: function (res) {
         var picture1 = res.data.data.msg
         var picture=[]
-        if(id==1){
-          for( var element in picture1){
-            if(picture1[element].type=="环境"){
-              picture.push(picture1[element])
-            }
-          }
-        } else if (id == 2) {
-          for (var element in picture1) {
-            if (picture1[element].type == "课堂") {
-              picture.push(picture1[element])
-            }
-          }
-        } else if (id == 3) {
-          for (var element in picture1) {
-            if (picture1[element].type == "活动") {
-              picture.push(picture1[element])
-            }
+        for( var element in picture1){
+          if(picture1[element].type == pic_type[id-1]){
+            picture.push(picture1[element])
           }
         }
 
