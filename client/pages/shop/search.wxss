@@ -163,6 +163,7 @@ page{
   flex-direction: row;
   position: absolute;
   bottom: 10rpx;
+  z-index: 100;
 }
 
 

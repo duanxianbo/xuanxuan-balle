@@ -9,15 +9,47 @@ Page({
   data: {
     flag:false,
     userInfo:[],
+    contractInfo: {}
   },
   onLoad: function (options) {
 
   },
-  onShow: function () {
 
+  mineContract:function(){
+    let that = this
+    wx.request({
+      url: 'https://104724433.xuanxuanballe.club/weapp/contract_show',
+      method:"POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data:{
+        user: that.data.userInfo.nickName
+      },
+      success: function (res) {
+        console.log(res)
+
+        if(res.data.code < 0){
+          util.showModel("查询失败", "请先登录")
+        } else{
+          var contractInfo = res.data.data.msg
+          console.log(contractInfo)
+          if (contractInfo.length){
+            util.showModel('您已签署合同',"合同信息会尽快发送至您的邮箱")
+          }else{
+            wx.navigateTo({
+              url: '/pages/contract/contract?user=' + that.data.userInfo.nickName
+            })
+            that.setData({
+              contractInfo: contractInfo
+            })
+  
+          }  
+        }
+      }
+
+    })
   },
-
-
 
   // 获取授权用户信息
   btn_sub: function (res) {

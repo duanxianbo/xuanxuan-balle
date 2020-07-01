@@ -30,6 +30,7 @@ Page({
   onLoad: function (options) {
     console.log('user='+options.user);
     console.log('pwd='+options.pwd);
+    console.log('openId=' + options.openId);
     this.setData({
       user:options.user,
       openId:options.openId

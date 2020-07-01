@@ -1,0 +1,5 @@
+<!--client/pages/contract/contractImg.wxml-->
+<view>
+  <web-view src="https://docs.qq.com/pdf/DSGNUZlhmQ0ZXQ09z">
+  </web-view>
+</view>

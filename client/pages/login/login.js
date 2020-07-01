@@ -128,7 +128,7 @@ Page({
   // 登录
   login: function () {
 
-    if (this.data.phone == '1' && this.data.password == '1') {
+    if (this.data.phone == 'xuanxuan2018' && this.data.password == 'xuanxuan2018') {
       wx.navigateTo({
         url: '/pages/login/login2',
       })

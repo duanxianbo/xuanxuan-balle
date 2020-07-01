@@ -2,12 +2,17 @@
 
 <view style="width:95%;left:13rpx;position:relative">
   <view class="img_item">
-    <image wx:for="{{pictures}}" wx:key="unique" src="{{item.URL}}" style="width:50%;height:{{item.height}}px" bindtap="previewImage" data-index="{{index}}" mode='aspectFill'></image>
+    <image wx:for="{{pictures}}" wx:key="unique" src="{{item.URL}}" style="width:50%;height:{{item.height}}px" bindtap="previewImage" data-index="{{index}}" mode='aspectFill'>
+    </image>
   </view>
-
-
 </view>
+<!-- <view class="row">
+  <input class="input" placeholder="添加图片" bindinput="addDescrp" value="{{value0}}"/>
+  <input class="input"  maxlength="200" placeholder="URL" placeholder-class='placeholder' bindinput="addUrl" value="{{value0}}"/>
+  <button class="btn-add" type="button" bindtap="addImage">添加   </button>
+</view> -->
 
 
 </scroll-view>
+
 

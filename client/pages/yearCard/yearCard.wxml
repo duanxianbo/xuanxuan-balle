@@ -6,12 +6,13 @@
  <view class="container">
  <view class='top'>
 <image src='/pages/images/schedule_top.png' mode="widthFix" class='top-image'></image>
-</view>
-
-
 <view class='txt'>
 欢迎办理年卡套餐：
 </view>
+</view>
+
+
+
 
 
 	<view class="content-container">
@@ -32,32 +33,36 @@
 
 		</view>
 	</view>
-	<view class="cart-detail" hidden="{{!showCartDetail||!cart.count}}">
-		<view class="mask" bindtap="hideCartDetail"></view>
-		<view class="list">
-			<view class="item" wx:for="{{cart.list}}" wx:for-index="id" wx:for-item="num" wx:key="id">
-				<view class="name ellipsis">{{goods[id].name}}</view>
-				<view class="total">￥{{goods[id].price*cart.list[id]}}</view>
-				<view class="reduce" data-id="{{id}}" bindtap="tapReduceCart">-</view>
-				<view class="num">{{num}}</view>
-				<view class="add" data-id="{{id}}" bindtap="tapAddCart">+</view>
+
+	<view class='footer'>
+
+		<view class="cart-detail" hidden="{{!showCartDetail||!cart.count}}">
+			<view class="mask" bindtap="hideCartDetail"></view>
+			<view class="list">
+				<view class="item" wx:for="{{cart.list}}" wx:for-index="id" wx:for-item="num" wx:key="id">
+					<view class="name ellipsis">{{goods[id].name}}</view>
+					<view class="total">￥{{goods[id].price*cart.list[id]}}</view>
+					<view class="reduce" data-id="{{id}}" bindtap="tapReduceCart">-</view>
+					<view class="num">{{num}}</view>
+					<view class="add" data-id="{{id}}" bindtap="tapAddCart">+</view>
+				</view>
 			</view>
 		</view>
-	</view>
-	<view class="cart">
-		<view class="data">
-			  <view class="icon"  bindtap="showCartDetail">
-				<image src="/pages/images/cart.png"></image>
-				<view class="count">{{cart.count}}</view>
-			  </view>
-			<view class="total">￥{{cart.total}}</view>
+		<view class="cart">
+			<view class="data">
+					<view class="icon"  bindtap="showCartDetail">
+					<image src="/pages/images/cart.png"></image>
+					<view class="count">{{cart.count}}</view>
+					</view>
+				<view class="total">￥{{cart.total}}</view>
+			</view>
+
+			<button bindtap='toPay' data-price="{{cart.total}}" data-cart="{{cart.list}}"  class='share' size="mini">
+				<image src='/pages/images/count.png' mode='widthFix'  class='submit_image'></image>
+			</button>
+
+
 		</view>
-
-    <button bindtap='toPay' data-price="{{cart.total}}" data-cart="{{cart.list}}"  class='share' size="mini">
-      <image src='/pages/images/count.png' mode='widthFix'  class='submit_image'></image>
-    </button>
-
-
 	</view>
   </view>
 

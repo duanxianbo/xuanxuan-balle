@@ -25,9 +25,9 @@ Page({
     cur_year: 0,
     cur_month: 0,
     count: 0,
-        time_flag: false,
+    time_flag: false,
     timer: '',
-    countDownNum: '120',
+    countDownNum: 50,
     duration: 0,
     flag: true,
     active: true,
@@ -49,9 +49,9 @@ Page({
   onLoad: function (options) {
 
     if (options.vid != undefined) {
-      console.log(options.vid)
       this.setData({
         vid: options.vid,
+        countDownNum: options.countDownNum
       });
     } else {
       wx.showToast({
@@ -59,27 +59,18 @@ Page({
       })
     }
 
-    videoPage = 1;
-    pageArr = new Array();
-    part_urls = {};
-    var that = this;
-    const vid = options.vid;
-    // const vid2 = options.vid2;
-    // console.log(vid);
-    qqVideo.getVideoes(vid).then(function (response) {
+    // videoPage = 1;
+    // pageArr = new Array();
+    // part_urls = {};
+    // const vid = options.vid;
+    // qqVideo.getVideoes(vid).then(function (response) {
 
-      that.setData({
-        videUrl: response[0],
-      });
-    })
-
-
-
+    //   that.setData({
+    //     videUrl: response[0],
+    //   });
+    // })
 
     var that = this
-    console.log(options.openId)
-    console.log(options.image)
-    console.log(options.name)
     this.setData({
       openId: options.openId,
       image: options.image,
@@ -97,14 +88,10 @@ Page({
       success: function (res) {
 
         var tab = res.data.data.msg
-        console.log(tab)
         var day = []
         var duration = []
         for (var element in tab) {
           console.log('vid=',options.vid)
-          // console.log('tab=', tab[element])
-          // console.log(tab[element].day)
-          // console.log(that.data.openId)
           if (tab[element].vid == options.vid) {
             if (tab[element].openId == that.data.openId) {
               day.push(tab[element].day)
@@ -121,10 +108,8 @@ Page({
         var today = myDate.toLocaleDateString()
         var today1 = new Date(today)
 
-        //  console.log(today)
 
         var oldDate = myDate - 1000 * 60 * 60 * 24
-        // console.log(oldDate)
 
         var yesterday = new Date(oldDate).toLocaleDateString()
         console.log('yesterday=',yesterday)
@@ -231,13 +216,9 @@ Page({
             success: function (res) {
 
               var tab = res.data.data.msg
-              console.log(tab)
               var day = []
               var duration = []
               for (var element in tab) {
-                // console.log('tab=', tab[element])
-                // console.log(tab[element].day)
-                // console.log(that.data.openId)
                 if (tab[element].openId == that.data.openId) {
                   day.push(tab[element].day)
                   duration.push(tab[element].duration)
@@ -252,16 +233,12 @@ Page({
               var today = myDate.toLocaleDateString()
               var today1 = new Date(today)
 
-              //  console.log(today)
-
               var oldDate = myDate - 1000 * 60 * 60 * 24
-              // console.log(oldDate)
 
               var yesterday = new Date(oldDate).toLocaleDateString()
               console.log(yesterday)
 
               for (var i in day) {
-                // console.log(day[i])
                 if (day[i] == yesterday) {
                   that.setData({
                     duration: duration[i]
@@ -363,7 +340,6 @@ Page({
 
           var myDate = new Date()
 
-          // console.log(myDate.toLocaleDateString())
           var day1 = myDate.toLocaleDateString()
           console.log(day1)
           var today = new Date(day1)
@@ -409,6 +385,7 @@ Page({
     that.setData({
       timer: setInterval(function () {//这里把setInterval赋值给变量名为timer的变量
         //每隔一秒countDownNum就减一，实现同步
+        
         countDownNum--;
         //然后把countDownNum存进data，好让用户知道时间在倒计着
         that.setData({
@@ -551,9 +528,7 @@ Page({
         })
 
         var signs = that.data.signUp;
-        console.log(signs)
         var daysArr = that.data.days;
-        console.log(daysArr)
 
         var myDate = new Date();
         var year= myDate.getFullYear(); 

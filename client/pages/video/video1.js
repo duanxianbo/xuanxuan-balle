@@ -11,7 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    vid: ''
   },
 
   /**
@@ -35,14 +35,18 @@ Page({
     part_urls = {};
     var that = this;
     const vid = options.vid;
+    that.setData({
+      vid: vid
+    })
+
     // const vid2 = options.vid2;
     // console.log(vid);
-    qqVideo.getVideoes(vid).then(function (response) {
+    // qqVideo.getVideoes(vid).then(function (response) {
 
-      that.setData({
-        videUrl: response[0],
-      });
-    })
+    //   that.setData({
+    //     videUrl: response[0],
+    //   });
+    // })
 
 
 

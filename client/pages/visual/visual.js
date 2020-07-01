@@ -6,7 +6,7 @@ Page({
     formId:'',
     toast1Hidden: true,
     date: '2019-01-01',
-    date2:'2000-01-01',
+    birth:'2000-01-01',
     modalHidden: true,
     modalHidden2: true,
     notice_str: '',
@@ -63,9 +63,9 @@ Page({
     })
   },
 
-  bindDateChange2: function (e) {
+  bindBirthChange: function (e) {
     this.setData({
-      date2: e.detail.value
+      birth: e.detail.value
     })
   },
 
@@ -113,7 +113,7 @@ if(e.detail.value.gender==1){
   sex="女"
 }
 
-    if (e.detail.value.username.length == 0 || e.detail.value.smallName.length == 0 || e.detail.value.age.length == 0 || e.detail.value.phone.length == 0 ||sex.length==0){
+    if (e.detail.value.username.length == 0 || e.detail.value.smallName.length == 0 || e.detail.value.phone.length == 0 ||sex.length==0){
   wx.showModal({
     title:"信息输入不全",
     content:"请输入完整的预约信息",
@@ -128,7 +128,7 @@ if(e.detail.value.gender==1){
         //  'Content-Type': 'application/json'
       },
       //data: {name:e.detail.value.username,sex:e.detail.value.gender,age:e.detail.value.age,date:e.detail.value.date},
-      data: { name: e.detail.value.username, smallName: e.detail.value.smallName, phone: e.detail.value.phone, date: e.detail.value.date,age:e.detail.value.age,sex:sex},
+      data: { name: e.detail.value.username, smallName: e.detail.value.smallName, phone: e.detail.value.phone, date: e.detail.value.date,birth:e.detail.value.birth,sex:sex},
       success: function (res) {
         if(res.data.status==0){
           wx.showToast({

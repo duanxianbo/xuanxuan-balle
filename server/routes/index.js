@@ -69,10 +69,12 @@ router.post("/form_del_videoCard", controllers.form_del_videoCard)
 router.post("/form_add_videoCard", controllers.form_add_videoCard)
 router.post("/addaboutMe", controllers.addaboutMe)
 router.post("/delaboutMe", controllers.delaboutMe)
-
+router.post("/contract_add", controllers.contract_add)
+router.post("/contract_show", controllers.contract_show)
 router.post('/wxpay', controllers.wxpay )
 
 router.post('/wxNotify',controllers.wxNotify )
+router.post('/picture_add', controllers.picture_add)
 
 
 module.exports = router

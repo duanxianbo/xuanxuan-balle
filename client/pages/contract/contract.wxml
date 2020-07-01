@@ -1,0 +1,93 @@
+<view class="container">
+
+  <view  class='row1'>
+    <view class="col">
+          <input placeholder='姓名' bindinput='bindNameInput'/> 
+    </view>
+    <view class="col">
+          <input placeholder='性别' bindinput='bindSexInput'/> 
+    </view>
+
+  </view>
+
+  <view class='row-container'>
+    <view class='row2'>
+
+      <view class='col-text'> 出生年月：</view>
+      <view class='col2'>
+        <picker  mode="date" value="{{birth}}" start="1994-01-01" end="2019-09-01" bindchange="bindBirthChange" name="date">        
+                <view>{{birth}}</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <view  class='row1'>
+    <view class="col-parents1">
+          <input placeholder='家长姓名' bindinput='bindParentsNameInput'/> 
+    </view>
+    <view class="col-parents2">
+          <input placeholder='身份证号码' bindinput='bindParentsIdcardInput'/> 
+    </view>
+
+  </view>
+
+  <view  class='row1'>
+    <view class="col-parents1">
+      <input placeholder='课时' bindinput='bindParentsNameInput'/> 
+    </view>
+    <view class="col-parents2">
+      <input placeholder='课程费用总计' bindinput='bindTotalPriceInput'/> 
+    </view>
+  </view>
+ <view class='row2'>
+   <input placeholder='请输入手机号' bindinput='bindPhoneInput'/> 
+ </view>
+  <view class='row2'>
+   <input placeholder='请输入您的邮箱' bindinput='bindEmailInput'/> 
+ </view>
+
+ <view class='row2'>
+   <input placeholder='请输验证码' bindinput='bindCodeInput' style='width:70%;'/> 
+   <button class='codeBtn' bindtap='getCode' hidden='{{hidden}}' disabled='{{btnDisabled}}'>{{btnValue}}</button>
+ </view>
+
+<!-- <view class="flex-view">
+  <view class="col">
+    <button bindtap='contractPdf' class="contractBtn" hover-class="button">
+      合同预览
+    </button>
+
+  </view>
+</view> -->
+
+  <!-- <view>
+    <view style="background-color:#fff;">扫描下方二维码预览合同</view>
+    <image class="img" src="https://wx1.sinaimg.cn/mw690/006pIIwbgy1gbic3nyc5mj3074074jr7.jpg"></image>
+  </view> -->
+  <view style="width:90%;background: #fff;">
+    <text>在浏览器中打开以下链接预览合同</text>
+    <text selectable='true' style="color:# ;text-overflow:ellipsis;word-wrap:break-word">
+      https://docs.qq.com/pdf/DSG15SmpNS3BtUmVC
+    </text>
+    
+  </view>
+
+  <view class="col">
+    <checkbox-group bindchange="bindContract">
+      <checkbox value="{{confirmed}}">
+        <text style="background-color:#fff;">同意</text>  
+      </checkbox>
+    </checkbox-group>
+
+  </view>
+    <view wx:if="{{ !confirmed}}">
+      <text style="color:red;">提交合同之前请勾选同意</text>
+    </view>
+
+ <view>
+   <button class='subBtn' bindtap='save' disabled="{{!confirmed}}" >提交合同</button>
+ </view>
+ 
+
+</view>

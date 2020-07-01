@@ -7,3 +7,27 @@ margin: 1%;
 display: inline-block;
 vertical-align: top;
 }
+
+.row{
+  display:flex;
+  margin-top: 20rpx;
+  border-top: 1rpx solid #dadada;
+  border-bottom: 1rpx solid #dadada;
+}
+
+.btn-add{
+  border-radius: 25rpx;
+  align-content: center;
+  text-align: center;
+  align-items: center;
+  width: 250rpx;
+  background-size: cover;
+  height:60rpx;
+}
+
+.input{
+  display: flex;
+  width:30%;
+
+}
+

@@ -26,7 +26,14 @@
 <image src='/pages/images/my_order.png' bindtap="mineOrder" class='mine' mode="widthFix"/>
 <image src='/pages/images/my_card.png' bindtap="mineYearCard" class='mine' mode="widthFix"/>
 
+<image src='/pages/images/my_contract.png' bindtap="mineContract" class='mine' mode="widthFix"/>
 
+
+<!-- <view wx:if="{{flag}}" class='block1' bindtap='contractINfo'>
+    <view style='width:90%;'>
+    <button class="contractBtn">签署合同</button>
+    </view>
+</view> -->
 
   <view class='bottom'>
 <image class='bottom-image' src='http://wx1.sinaimg.cn/mw690/006p6Tvely1g3kd7uxtg0j33kt1tv4qr.jpg' mode="widthFix"></image>

@@ -1,25 +1,25 @@
 {
   "pages": [
-         "pages/index/index",
-         "pages/inform/single",
-         "pages/inform/yearCard", 
-      "pages/photo/photo0",
-      "pages/vip/vip",
+    "pages/index/index",
+    "pages/inform/single",
+    "pages/inform/yearCard",
+    "pages/photo/photo0",
+    "pages/vip/vip",
     "pages/canlendar/canlendar",
-        "pages/mine/mine",
-        "pages/shop/search",
-        "pages/groupBuy/groupBuy",
-        "pages/yearCard/yearCard",
-        "pages/visual/visual",
-        "pages/schedule/schedule",
-      "pages/video/video",
-       "pages/aboutMe/aboutMe",
+    "pages/mine/mine",
+    "pages/shop/search",
+    "pages/groupBuy/groupBuy",
+    "pages/yearCard/yearCard",
+    "pages/visual/visual",
+    "pages/schedule/schedule",
+    "pages/video/video",
+    "pages/aboutMe/aboutMe",
     "pages/groupBuy/groupBuy_share",
     "pages/pay/pay_single",
     "pages/pay/pay_yearCard",
     "pages/mine/group",
     "pages/mine/order",
-  "pages/mine/yearCard",
+    "pages/mine/yearCard",
     "pages/card/card",
     "pages/card/card0",
     "pages/class/class",
@@ -31,14 +31,16 @@
     "pages/login/groupBuy",
     "pages/login/photo",
     "pages/login/aboutMe",
-     "pages/login/video",
+    "pages/login/video",
     "pages/login/video_card",
     "pages/login/image",
-    "pages/video/video1"
+    "pages/video/video1",
+    "pages/contract/contract",
+    "pages/contract/contractImg"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "white",
+    "navigationBarBackgroundColor": "#FFFFFF",
     "navigationBarTitleText": "ENJOY DANCE",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true
@@ -84,5 +86,14 @@
     "vpush-view": "/vpush-pro-sdk/components/view",
     "vpush-checkin": "/vpush-pro-sdk/components/checkin"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "navigateToMiniProgramAppIdList": [
+    "wxd45c635d754dbf59"
+  ],
+  "plugins": {
+    "tencentvideo": {
+      "version": "1.3.7",
+      "provider": "wxa75efa648b60994b"
+    }
+  }
 }

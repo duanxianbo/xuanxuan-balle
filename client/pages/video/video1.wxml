@@ -1,5 +1,7 @@
 <!--pages/video/video1.wxml-->
 
 <view class='content'>
-      <video src='{{videUrl}}' class='content' ></video>
+      <!-- <video src='{{videUrl}}' class='content' ></video> -->
+      <txv-video class="content"  vid="{{vid}}" playerid="txv"  autoplay="{{false}}"></txv-video>
+
 </view>

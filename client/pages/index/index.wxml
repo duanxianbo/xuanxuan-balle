@@ -1,9 +1,9 @@
 <!--index.wxml-->
-<vpush-checkin 
+<!-- <vpush-checkin 
 title='获取推送权限'
 desc='获取下次的推送'
 bind:onCheckIn="checkInHandler"
-/>
+/> -->
 
 
 <image src='http://wx4.sinaimg.cn/mw690/006p6Tvely1g3kcs566lyj33oc5wo4qv.jpg' class='background' mode='aspectFit'/>

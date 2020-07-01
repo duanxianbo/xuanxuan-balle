@@ -19,8 +19,7 @@
 				<view class="goods" wx:for="{{goods}}" wx:for-index="idx" wx:key="key">	
 
             <view class='item'>
-                  <image src='http://wx2.sinaimg.cn/mw690/006p6Tvely1g3coh3tepgj30rh0f4wed.jpg' class='pic2' mode='scaleToFill'/>
-                 <image src="{{item.image}}" class='pic1' mode='widthFix'/> 
+                  <image src='{{item.image}}' class='pic2' mode='scaleToFill'/>
                  <!-- <image src='http://wx2.sinaimg.cn/mw690/006p6Tvely1g3crdgpx5mj30r507ndk9.jpg' class='pic1' mode='widthFix'/> -->
 
                   <view class='name'>{{item.name}}</view>
@@ -28,7 +27,7 @@
                   <view class='methods'>
                         <view class='price'> 单人价: ￥{{item.price}} </view>
                         <view style='width:100rpx'></view>
-                        <view class='price'>  团购价: ￥{{item.price2}} </view>
+                        <view class='price'>  团购价: ￥{{item.price2}}/2课时 </view>
                   </view>
 
                   <view class='methods1'>

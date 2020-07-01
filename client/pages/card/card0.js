@@ -8,6 +8,7 @@ Page({
     openId:'',
     image:'',
     name:'',
+    tab: []
 
   },
 
@@ -16,6 +17,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    console.log(options)
     wx.request({
       url: 'https://104724433.xuanxuanballe.club/weapp/video_card',
       // url: 'https://rv647fej.qcloud.la/weapp/video',
@@ -48,15 +50,17 @@ Page({
 
 
   toVideoSum: function (e) {
-    var that = this,
-      vid = e.currentTarget.dataset.vid;
+    var that = this
+      var vid = e.currentTarget.dataset.vid;
+      var index = e.currentTarget.dataset.index;
+      var countDownNum = that.data.tab[index].countDownNum
     // console.log(vid);
     vid.toString;
     // wx.navigateTo({
     //   url: '/pages/card/card?vid=' + vid + '&openId=' + this.data.openId + '&image=' + this.data.image + '&name='+this.data.name,
     // });
     wx.navigateTo({
-      url: '/pages/canlendar/canlendar?vid=' + vid + '&openId=' + this.data.openId + '&image=' + this.data.image + '&name=' + this.data.name,
+      url: '/pages/canlendar/canlendar?vid=' + vid + '&openId=' + this.data.openId + '&image=' + this.data.image + '&name=' + this.data.name + '&countDownNum=' + countDownNum,
     });
   },
 

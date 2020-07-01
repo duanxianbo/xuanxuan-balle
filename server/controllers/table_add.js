@@ -43,11 +43,14 @@ await mysql.schema.hasTable(newDate).then(function (exists) {
 });
   
   await mysql.schema.createTable(newDate, function (table) {
+    table.integer('id');
     table.string('user');
     table.string('password');
     table.string('name');
     table.integer('class');
+    table.integer('waste');
     table.string('openId');
+    
   });
   
   await mysql.batchInsert(newDate, data);

@@ -29,6 +29,7 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (res) {
+        console.log('test')
         var shops = res.data.data.msg
         console.log('shops=',shops)
 
@@ -53,11 +54,12 @@ Page({
  
 toPay:function(e){
   var id = e.currentTarget.dataset.id
+  console.log("test")
   console.log(id)
   console.log(this.data.goods[id])
-wx.navigateTo({
-  url: '/pages/pay/pay_single?price='+this.data.goods[id].price+"&name="+this.data.goods[id].name,
-})
+  wx.navigateTo({
+    url: '/pages/pay/pay_single?price='+this.data.goods[id].price+"&name="+this.data.goods[id].name,
+  })
 },
 
 toGroupBuy:function(e){

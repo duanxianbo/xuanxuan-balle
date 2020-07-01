@@ -10,6 +10,7 @@ bind:onCheckIn="checkInHandler"
     </view>
 </view>
 
+
 <view  class='block1' open-type="getUserInfo" bindtap='btn_sub'>
                      
 <!-- <view  class='block1' bindgetuserinfo='btn_sub' open-type="getUserInfo" bindtap='btn_sub'> -->
@@ -17,6 +18,8 @@ bind:onCheckIn="checkInHandler"
     <image src='/pages/images/vip2.png' class='image' mode="widthFix"></image>
     </view>
 </view>
+
+
 
   <view class='bottom'>
 <image class='bottom-image' src='http://wx1.sinaimg.cn/mw690/006p6Tvely1g3kd7uxtg0j33kt1tv4qr.jpg' mode="widthFix"></image>

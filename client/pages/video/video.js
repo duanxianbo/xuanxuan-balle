@@ -31,6 +31,7 @@ Page({
       },
       success: function (res) {
         var tab = res.data.data.msg
+        console.log(tab)
         //  for (var item in tab) {
         //    console.log(tab[item].name)
         that.setData({

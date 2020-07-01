@@ -1,5 +1,7 @@
 const CONF = {
     port: '5757',
+
+
     rootPathname: '',
 
     // 微信小程序 App ID
@@ -24,7 +26,6 @@ const CONF = {
         pass: 'xuanxuan2018',
         char: 'utf8mb4'
     },
-
     cos: {
         /**
          * 地区简称

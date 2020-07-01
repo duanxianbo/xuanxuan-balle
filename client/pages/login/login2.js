@@ -30,7 +30,6 @@ Page({
     this.setData({
       myarray: myarray
     })
-    console.log(this.data.myarray.length)
 
     var that = this
     wx.request({
@@ -42,7 +41,6 @@ Page({
       },
       success: function (res) {
         var tab = res.data.data.msg
-        console.log(tab)
         that.setData({
           tab: tab
         })
@@ -122,12 +120,12 @@ Page({
       },
 
       data: { user: this.data.user, password: this.data.passwd, name: this.data.name, class: this.data.course, openId: "", waste: this.data.waste },
-
+      //
       success: function (res) {
         console.log(res)
-        if (res.data.status == 0) {
+        if (res.data.code != 0) {
           wx.showToast({
-            title: res.data.info,
+            title: "更新失败",
             icon: 'loading',
             duration: 1500
           })
@@ -320,7 +318,6 @@ Page({
           }
 
         }
-
 
 
       }
