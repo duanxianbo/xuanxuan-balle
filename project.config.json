@@ -12,7 +12,7 @@
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
-		"nodeModules": false,
+		"nodeModules": true,
 		"autoAudits": false,
 		"showShadowRootInWxmlPanel": true,
 		"scopeDataCheck": false,
@@ -36,5 +36,7 @@
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"compileType": "miniprogram",
+	"cloudfunctionRoot": "functions/",
+	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
 	"condition": {}
 }

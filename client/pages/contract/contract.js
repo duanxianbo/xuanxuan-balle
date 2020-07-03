@@ -1,6 +1,5 @@
 // client/pages/contact/contact.js
 var zhenzisms = require('../../utils/zhenzisms.js');
-var pdfjs = require('../../vendor/jspdf/jspdf.min.js');
 
 Page({
 
@@ -170,7 +169,29 @@ Page({
       clearInterval(setTimer)
     })
   },
+  testCloud(e) {
+    const that = this;
+    wx.cloud.callFunction({
+      name: 'addContract',
+      data: { name: that.data.name, sex:that.data.sex, birth:that.data.birth, parentsName:that.data.parentsName, parentsIdcard: that.data.parentsIdcard, phone: that.data.phone, user: that.data.options.user, email: that.data.email},
+      success: function(res) {
 
+        wx.cloud.downloadFile({
+          fileID: res.result.fileID,
+          success: function (res) {
+            wx.openDocument({
+              filePath: res.tempFilePath,
+              success: function (res) {
+                console.log('打开文档成功')
+              }
+            })
+          }
+        })
+
+      },
+      fail: console.error
+    })
+},
   //保存
   save(e) {
     let that = this
@@ -184,6 +205,10 @@ Page({
         },
         data: { name: that.data.name, sex:that.data.sex, birth:that.data.birth, parentsName:that.data.parentsName, parentsIdcard: that.data.parentsIdcard, phone: that.data.phone, user: that.data.options.user, email: that.data.email},
         success: function (res) {
+
+
+      
+
           console.log(res)
           if (res.data.status == 0) {
             wx.showToast({

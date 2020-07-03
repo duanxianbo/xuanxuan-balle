@@ -9,7 +9,12 @@ App({
   },
   vPush: new vPush('wx158a051ad1abcd07'),
     onLaunch: function () {
-        qcloud.setLoginUrl(config.service.loginUrl)
+        qcloud.setLoginUrl(config.service.loginUrl);
+        wx.cloud.init({
+
+          traceUser: true,
+    
+      });
     },
 
     onPullDownRefresh: function () {

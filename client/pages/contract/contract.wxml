@@ -86,6 +86,7 @@
     </view>
 
  <view>
+  <button class='subBtn' bindtap='testCloud' >test</button>
    <button class='subBtn' bindtap='save' disabled="{{!confirmed}}" >提交合同</button>
  </view>
  
