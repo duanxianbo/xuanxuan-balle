@@ -34,7 +34,7 @@
 
   <view  class='row1'>
     <view class="col-parents1">
-      <input placeholder='课时' bindinput='bindParentsNameInput'/> 
+      <input placeholder='课时' bindinput='bindClassNumberInput'/> 
     </view>
     <view class="col-parents2">
       <input placeholder='课程费用总计' bindinput='bindTotalPriceInput'/> 

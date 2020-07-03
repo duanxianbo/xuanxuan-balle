@@ -24,7 +24,8 @@ Page({
     systemInfo: {},
     pdfShow: false,
     options: {},
-    totalPrice: 0
+    totalPrice: 0,
+    classNumber: 0
 
   },
 
@@ -65,6 +66,11 @@ Page({
   bindTotalPriceInput(e) {
     this.setData({
       totalPrice: e.detail.value
+    })
+  },
+  bindClassNumberInput(e) {
+    this.setData({
+      classNumber: e.detail.value
     })
   },
   bindParentsNameInput(e){
@@ -173,7 +179,7 @@ Page({
     const that = this;
     wx.cloud.callFunction({
       name: 'addContract',
-      data: { name: that.data.name, sex:that.data.sex, birth:that.data.birth, parentsName:that.data.parentsName, parentsIdcard: that.data.parentsIdcard, phone: that.data.phone, user: that.data.options.user, email: that.data.email},
+      data: { name: that.data.name, sex:that.data.sex, birth:that.data.birth, parentsName:that.data.parentsName, parentsIdcard: that.data.parentsIdcard, totalPrice: that.data.totalPrice, classNumber: that.data.classNumber},
       success: function(res) {
 
         wx.cloud.downloadFile({
