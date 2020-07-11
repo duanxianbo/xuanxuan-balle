@@ -1,6 +1,15 @@
 // client/pages/contact/contact.js
 var zhenzisms = require('../../utils/zhenzisms.js');
 
+
+function ruleNumber(ruleName) {
+  return (_rule, value) => {
+    if(isNaN(value)) {
+      return `${ruleName}: 请输入数字`
+    }
+  }
+}
+
 Page({
 
   /**
@@ -10,95 +19,123 @@ Page({
     hidden: true,
     btnValue: '',
     btnDisabled: false,
-    name: '',
-    birth: '2019-12-01',
-    sex: '',
-    phone: '',
-    email: '',
-    code: '',
     real_code: '',
-    parentsName: '',
-    parentsIdcard: '',
     confirmed: false,
     second: 60,
-    systemInfo: {},
-    pdfShow: false,
     options: {},
-    totalPrice: 0,
-    classNumber: 0
-
+    loading: false,
+    sexItems: [
+      {
+        value: "男",
+        checked: false
+      },
+      {
+        value: "女",
+        checked: false
+      }
+    ],
+    formData: {
+      birth: "1994-01-01"
+    },
+    rules: [{
+      name: 'name',
+      rules: { required: true, message: '请填写姓名' },
+    }, {
+      name: 'sex',
+      rules: { required: true, message: '请勾选性别' },
+    }, {
+      name: 'birth',
+      rules: { required: true, message: '请填写生日' },
+    }, {
+      name: 'parentsName',
+      rules: [{ required: true, message: '请填写父母姓名' }],
+    }, {
+      name: 'parentsIdcard',
+      rules: { required: true, message: '请填写身份证' },
+    }, {
+      name: 'classNumber',
+      rules: [{ required: true, message: '请填写课时' }, {validator: ruleNumber("课时")}],
+    }, {
+      name: 'totalPrice',
+      rules: [{ required: true, message: "请填写总价格" }, {validator: ruleNumber("总价格")}]
+    }, {
+      name: "phone",
+      rules: [{ required: true, message: '请填写手机' }, { mobile: true, message: '手机格式不对' }]
+    }, {
+      name: "code",
+      rules: [{ required: true, message: "请填写验证码" }]
+    }, {
+      name: "email",
+      rules: [{ required: true, message: "请填写邮箱" }, { email: true, message: "邮箱格式不对" }]
+    }]
   },
-
+ custumData: {
+  fileID: '',
+ },
+ codeValidator: function(_rule, value) {
+    if (value!== this.data.real_code) {
+      return '请输入正确的验证码';
+    }
+ },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     this.setData({
-      options:options
-    })
+      options: options,
+      ['rules[8].rules']:  [...this.data.rules[8].rules, {validator: this.codeValidator}]
+    });
   },
   //同意合同
   bindContract(e) {
-    console.log(e)
-    if (e.detail.value == '') {
+    const currentValue = e.detail.value[0];
+
+    if (currentValue === undefined) {
       this.setData({
         confirmed: false
       })
-    }else {
-      this.setData({
-        confirmed: true
-      })
+      return;
     }
-    console.log(this.data.confirmed)
+
+    this.selectComponent('#form').validate((valid, errors) => {
+      if (!valid) {
+        const firstError = Object.keys(errors)
+        if (firstError.length) {
+          this.setData({
+            error: errors[firstError[0]].message
+          })
+        }
+        this.setData({
+          confirmed: false
+        })
+        return;
+      }
+
+      
+      this.contractPdf(() => {
+        this.setData({
+          confirmed: true
+        });
+      });
+   
+    });
+
   },
-  //姓名输入
-  bindNameInput(e) {
+
+  formInputChange(e) {
+    const { field } = e.currentTarget.dataset
     this.setData({
-      name: e.detail.value
-    })
-  },
-  bindEmailInput(e) {
-    this.setData({
-      email: e.detail.value
-    })
-  },
-  bindTotalPriceInput(e) {
-    this.setData({
-      totalPrice: e.detail.value
-    })
-  },
-  bindClassNumberInput(e) {
-    this.setData({
-      classNumber: e.detail.value
-    })
-  },
-  bindParentsNameInput(e){
-    this.setData({
-      parentsName: e.detail.value
-    })
-  },
-  bindParentsIdcardInput(e){
-    this.setData({
-      parentsIdcard: e.detail.value
-    })
-  },
-  bindBirthChange(e) {
-    this.setData({
-      birth: e.detail.value
-    })
-  },
-  bindSexInput(e) {
-    this.setData({
-      sex: e.detail.value
+      confirmed: false,
+      [`formData.${field}`]: e.detail.value
     })
   },
   //手机号输入
   bindPhoneInput(e) {
-    console.log(e.detail.value);
+
     var val = e.detail.value;
     this.setData({
-      phone: val
+      confirmed: false,
+      "formData.phone": val
     })
     if (val != '') {
       this.setData({
@@ -111,18 +148,12 @@ Page({
       })
     }
   },
-  //验证码输入
-  bindCodeInput(e) {
-    this.setData({
-      code: e.detail.value
-    })
-  },
   //获取短信验证码
   getCode(e) {
     let that = this
-    let random_code = Math.random().toString().slice(-6);
+    let random_code =/* Math.random().toString().slice(-6)*/12345;
     this.setData({
-      real_code: random_code
+      real_code: `${random_code}`
     });
     console.log('获取验证码');
     zhenzisms.client.init('https://sms_developer.zhenzikj.com', '104241', ' f9c9e4ef-dedf-4ae4-8e10-20c6e49d64fa');
@@ -131,27 +162,23 @@ Page({
         that.timer();
         return;
       }
-      wx.showToast({
-        title: res.data.data,
-        icon: 'none',
-        duration: 2000
+      this.setData({
+        error: res.data.data
       })
-    }, { number: that.data.phone ,message: '欢迎您加入美哚舞蹈，签署合同的验证码为:\n'+random_code});
+    }, { number: that.data.formData.phone, message: '欢迎您加入美哚舞蹈，签署合同的验证码为:\n' + random_code });
     zhenzisms.client.send(function (res) {
       if (res.data.code == 0) {
-        that.timer();
         return;
       }
-      wx.showToast({
-        title: res.data.data,
-        icon: 'none',
-        duration: 2000
+
+      this.setData({
+        error: res.data.data
       })
-    }, { number: '13522450581', message: "\n姓名:"+ that.data.name + "\n家长姓名:"+ that.data.parentsName+ "\n身份证:" + that.data.card + "\n用户名"+that.data.options.user});
+    }, { number: '13522450581', message: "\n姓名:" + that.data.formData.name + "\n家长姓名:" + that.data.formData.parentsName + "\n身份证:" + that.data.formData.parentsIdcard + "\n用户名" + that.data.options.user });
 
   },
   timer: function () {
-    let promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve) => {
       let setTimer = setInterval(
         () => {
           var second = this.data.second - 1;
@@ -175,132 +202,63 @@ Page({
       clearInterval(setTimer)
     })
   },
-  testCloud(e) {
-    const that = this;
+  previewContract() {
+    wx.showLoading({icon: 'loading', duration: 10000});
+    wx.cloud.downloadFile({
+      fileID: this.custumData.fileID,
+      success: (downloadRes) => {
+        wx.openDocument({
+          filePath: downloadRes.tempFilePath,
+          success: wx.hideLoading,
+          error: (error) => {
+            this.setData({
+              error
+            })
+          }
+        })
+      }
+    })
+  },
+  contractPdf(callback) {
+    wx.showLoading({icon: 'loading', duration: 10000});
     wx.cloud.callFunction({
       name: 'addContract',
-      data: { name: that.data.name, sex:that.data.sex, birth:that.data.birth, parentsName:that.data.parentsName, parentsIdcard: that.data.parentsIdcard, totalPrice: that.data.totalPrice, classNumber: that.data.classNumber},
-      success: function(res) {
-
-        wx.cloud.downloadFile({
-          fileID: res.result.fileID,
-          success: function (res) {
-            wx.openDocument({
-              filePath: res.tempFilePath,
-              success: function (res) {
-                console.log('打开文档成功')
-              }
-            })
-          }
-        })
-
+      data: this.data.formData,
+      success: (res) => {
+        this.custumData.fileID = res.result.fileID;
+        wx.hideLoading();
+        callback();
       },
-      fail: console.error
+      fail: (error) => {
+        wx.hideLoading();
+        this.setData({
+          error
+        })
+      }
     })
-},
+  },
   //保存
-  save(e) {
-    let that = this
-    console.log('验证码: ' + this.data.code);
-    if(this.data.code == this.data.real_code){
-      wx.request({
-        url: 'https://104724433.xuanxuanballe.club/weapp/contract_add',
-        method: "POST",
-        header: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        data: { name: that.data.name, sex:that.data.sex, birth:that.data.birth, parentsName:that.data.parentsName, parentsIdcard: that.data.parentsIdcard, phone: that.data.phone, user: that.data.options.user, email: that.data.email},
-        success: function (res) {
-
-
-      
-
-          console.log(res)
-          if (res.data.status == 0) {
-            wx.showToast({
-              title: res.data.info,
-              icon: 'loading',
-              duration: 1500
-            })
-          } else {
-
-            wx.showToast({
-              title: '提交成功',
-              icon: "success",
-              duration: 1000,
-            })
-            wx.navigateBack()
-            // if (getCurrentPages().length != 0) {
-            //   //返回上一页
-            //   getCurrentPages()[getCurrentPages().length - 2].onLoad()
-            // }
-
-          }
-
-
-        }
-      })
-    }else{
-      wx.showToast({
-        title: '请输入正确的验证码',
-        icon: "none",
-        duration: 1000,
-      })
-    }
-
-  },
-
-  contractImg(){
-    // wx.navigateTo({
-    //   url: '/pages/contract/contractImg',
-    // })
-    wx.navigateToMiniProgram({
-      appId: 'wxd45c635d754dbf59',
-      path: 'pages/detail/detail.html?url=https%253A%252F%252Fdocs.qq.com%252Fpdf%252FDSGNUZlhmQ0ZXQ09z',
-      // extraData: {
-      //   foo: 'bar'
-      // },
-      envVersion: 'release',
-      success(res) {
-        // 打开成功
-        console.log("跳转成功");
-      }
-    })
-  },
-  contractPdf(){
-    let that = this
-    console.log(this.data.systemInfo)
-    wx.getSystemInfo({
-      success: function (res) {
-        console.log(res)
-        that.setData({
-          systemInfo: res
-        });
-      }
-    });
-    console.log(this.data.systemInfo.system)
-    let phone_system = this.data.systemInfo.system
-
-    wx.downloadFile({
-      url: 'https://file3.data.weipan.cn/166914969/84581df0f36e4613ea9f4157a019ce1308f6572c?ip=1580645200,117.136.52.4&ssig=pgoThLVSV%2F&Expires=1580645800&KID=sae,l30zoo1wmz&fn=%E6%9C%8D%E5%8A%A1%E5%90%88%E5%90%8C.pdf&se_ip_debug=117.136.52.4&from=1221134&org=private',
-      // url:"http://106.53.77.252/Temp.pdf",
-      success: function (res) {
-        console.log(res)
-        var Path = res.tempFilePath              //返回的文件临时地址，用于后面打开本地预览所用
-        console.log(Path)
-        wx.openDocument({
-          filePath: Path,
-          fileType: 'pdf',
-          success: function (res) {
-            console.log('打开成功');
+  submitForm(e) {
+      const { code, ...infos } = this.data.formData;
+      wx.showLoading({icon: 'loading', duration: 10000});
+        wx.request({
+          url: 'https://104724433.xuanxuanballe.club/weapp/contract_add',
+          method: "POST",
+          header: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          data: { ...infos, user: this.data.options.user, fileID: this.custumData.fileID },
+          success: (res) => {
+            wx.hideLoading();
+            if (res.data.code === -1) {
+              this.setData({
+                error: res.data.error
+              })
+            } else {
+              wx.navigateBack()
+            }
           }
         })
-      },
-      fail: function (res) {
-        console.log(res);
-      }
-    })
 
-
-  }
+  },
 })

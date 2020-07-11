@@ -49,10 +49,10 @@ exports.main = (event, context) => {
     doc.moveUp();
     doc.text(classNumber, 150, undefined, {underline: true});
     doc.moveUp();
-    doc.text("课时（45分钟/课时)",180);
+    doc.text("课时（45分钟/课时)",200);
     doc.text("3、课程费用总计：", 80);
     doc.moveUp();
-    doc.text(totalPrice, 210, undefined, {underline: true});
+    doc.text(totalPrice, 180, undefined, {underline: true});
     doc.moveUp();
     doc.text("元。", 260);
 

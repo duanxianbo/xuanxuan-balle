@@ -1,4 +1,6 @@
 /**app.wxss**/
+@import '/miniprogram_npm/weui-miniprogram/weui-wxss/dist/style/weui.wxss';
+@import '/miniprogram_npm/weui-miniprogram/weui-wxss/dist/style/icon/weui-icon.wxss';
 .container {
   left:18rpx;
   height: 100%;

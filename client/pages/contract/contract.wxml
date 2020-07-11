@@ -1,77 +1,90 @@
-<view class="container">
+<mp-form-page>
+	<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+	<mp-form id="form" rules="{{rules}}" models="{{formData}}">
+		<mp-cells>
+			<mp-cell prop="name" title="姓名" ext-class="">
+				<input bindinput="formInputChange" data-field="name" class="weui-input"/>
+			</mp-cell>
+			<mp-cell prop="sex" title="性别" ext-class="">
+				<mp-checkbox-group prop="sex" multi="{{false}}" bindchange="formInputChange" ext-class="checkbox-group--inlined" data-field="sex">
+					<mp-checkbox wx:for="{{sexItems}}" wx:key="value" label="{{item.value}}" value="{{item.value}}" checked="{{item.checked}}" ext-class="checkbox--inlined"></mp-checkbox>
+				</mp-checkbox-group>
+			</mp-cell>
 
-  <view  class='row1'>
-    <view class="col">
-          <input placeholder='姓名' bindinput='bindNameInput'/> 
-    </view>
-    <view class="col">
-          <input placeholder='性别' bindinput='bindSexInput'/> 
-    </view>
+			<mp-cell prop="birth" title="出生年月：" ext-class="">
+				<picker mode="date" value="{{formData.birth}}" start="1994-01-01" end="2019-09-01" bindchange="formInputChange" data-field="birth">
+					<view>{{formData.birth}}</view>
+				</picker>
+			</mp-cell>
 
-  </view>
+			<mp-cell prop="parentsName" title="家长姓名" ext-class="">
+				<input bindinput="formInputChange" data-field="parentsName" class="weui-input" />
+			</mp-cell>
 
-  <view class='row-container'>
-    <view class='row2'>
+			<mp-cell prop="parentsIdcard" title="身份证号码" ext-class="">
+				<input bindinput="formInputChange" data-field="parentsIdcard" class="weui-input" />
+			</mp-cell>
 
-      <view class='col-text'> 出生年月：</view>
-      <view class='col2'>
-        <picker  mode="date" value="{{birth}}" start="1994-01-01" end="2019-09-01" bindchange="bindBirthChange" name="date">        
-                <view>{{birth}}</view>
-        </picker>
-      </view>
-    </view>
-  </view>
+			<mp-cell prop="classNumber" title="课时" ext-class="">
+				<input bindinput="formInputChange" data-field="classNumber" class="weui-input" />
+			</mp-cell>
 
-  <view  class='row1'>
-    <view class="col-parents1">
-          <input placeholder='家长姓名' bindinput='bindParentsNameInput'/> 
-    </view>
-    <view class="col-parents2">
-          <input placeholder='身份证号码' bindinput='bindParentsIdcardInput'/> 
-    </view>
+			<mp-cell prop="totalPrice" title="费用总计" ext-class="">
+				<input bindinput="formInputChange" data-field="totalPrice" class="weui-input" />
+			</mp-cell>
 
-  </view>
+			<mp-cell prop="phone" title="手机号" ext-class=" weui-cell_vcode">
+				<input bindinput="bindPhoneInput" data-field="phone" class="weui-input" />
+				<view slot="footer" class="weui-vcode-btn" bindtap='getCode' hidden='{{hidden}}' disabled='{{btnDisabled}}'>{{btnValue}}</view>
+			</mp-cell>
 
-  <view  class='row1'>
-    <view class="col-parents1">
-      <input placeholder='课时' bindinput='bindClassNumberInput'/> 
-    </view>
-    <view class="col-parents2">
-      <input placeholder='课程费用总计' bindinput='bindTotalPriceInput'/> 
-    </view>
-  </view>
+			<mp-cell prop="code" title="请输验证码" ext-class="">
+				<input bindinput="formInputChange" data-field="code" class="weui-input" />
+			</mp-cell>
+
+			<mp-cell prop="email" title="邮箱" ext-class="">
+				<input bindinput="formInputChange" data-field="email" class="weui-input" />
+			</mp-cell>
+
+		</mp-cells>
+
+
+	</mp-form>
+	<checkbox-group slot="tips" bindchange="bindContract">
+		<label class="weui-agree" for="weuiAgree">
+			<view class="weui-agree__text">
+				<checkbox id="weuiAgree" checked="{{confirmed}}" />
+				同意《合同》
+			</view>
+		</label>
+	</checkbox-group>
+	<view slot="button">
+		<button class="weui-btn weui-form-preview__btn" disabled="{{!confirmed}}" bindtap="previewContract">预览</button>
+		<button class="weui-btn" type="primary" disabled="{{!confirmed}}" bindtap="submitForm">确定</button>
+	</view>
+</mp-form-page>
+
+<!--view class="container">
  <view class='row2'>
-   <input placeholder='请输入手机号' bindinput='bindPhoneInput'/> 
+   <input placeholder='请输入手机号' bindinput='bindPhoneInput' name="phone"/> 
  </view>
   <view class='row2'>
-   <input placeholder='请输入您的邮箱' bindinput='bindEmailInput'/> 
+   <input placeholder='请输入您的邮箱' bindinput='bindEmailInput' name="email"/> 
  </view>
 
  <view class='row2'>
-   <input placeholder='请输验证码' bindinput='bindCodeInput' style='width:70%;'/> 
-   <button class='codeBtn' bindtap='getCode' hidden='{{hidden}}' disabled='{{btnDisabled}}'>{{btnValue}}</button>
+   <input placeholder='请输验证码' bindinput='bindCodeInput' style='width:70%;' name="code"/> 
+   <button class='codeBtn' bindtap='getCode' hidden='{{hidden}}' disabled='{{btnDisabled}}' name="">{{btnValue}}</button>
  </view>
 
-<!-- <view class="flex-view">
+<view class="flex-view">
   <view class="col">
-    <button bindtap='contractPdf' class="contractBtn" hover-class="button">
-      合同预览
+    <button bindtap='contractPdf' class="contractBtn" hover-class="button" disabled="{{loading}}">
+      {{loading ? "加载中" : "合同预览"}}
     </button>
 
   </view>
-</view> -->
-
-  <!-- <view>
-    <view style="background-color:#fff;">扫描下方二维码预览合同</view>
-    <image class="img" src="https://wx1.sinaimg.cn/mw690/006pIIwbgy1gbic3nyc5mj3074074jr7.jpg"></image>
-  </view> -->
-  <view style="width:90%;background: #fff;">
-    <text>在浏览器中打开以下链接预览合同</text>
-    <text selectable='true' style="color:# ;text-overflow:ellipsis;word-wrap:break-word">
-      https://docs.qq.com/pdf/DSG15SmpNS3BtUmVC
-    </text>
-    
-  </view>
+</view> 
 
   <view class="col">
     <checkbox-group bindchange="bindContract">
@@ -79,16 +92,15 @@
         <text style="background-color:#fff;">同意</text>  
       </checkbox>
     </checkbox-group>
-
   </view>
     <view wx:if="{{ !confirmed}}">
       <text style="color:red;">提交合同之前请勾选同意</text>
     </view>
 
  <view>
-  <button class='subBtn' bindtap='testCloud' >test</button>
-   <button class='subBtn' bindtap='save' disabled="{{!confirmed}}" >提交合同</button>
- </view>
- 
 
-</view>
+   <button class='subBtn' formType="submit" disabled="{{!confirmed}}" >提交合同</button>
+ </view>
+ </form>
+
+</view!-->

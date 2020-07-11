@@ -35,8 +35,7 @@
     "pages/login/video_card",
     "pages/login/image",
     "pages/video/video1",
-    "pages/contract/contract",
-    "pages/contract/contractImg"
+    "pages/contract/contract"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -11,9 +11,7 @@ App({
     onLaunch: function () {
         qcloud.setLoginUrl(config.service.loginUrl);
         wx.cloud.init({
-
-          traceUser: true,
-    
+          traceUser: true
       });
     },
 
