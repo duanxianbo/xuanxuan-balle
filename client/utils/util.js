@@ -20,6 +20,13 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+function ruleNumber(ruleName) {
+  return (_rule, value) => {
+    if(isNaN(value)) {
+      return `${ruleName}: 请输入数字`
+    }
+  }
+}
 
 // 显示繁忙提示
 var showBusy = text => wx.showToast({
@@ -45,4 +52,4 @@ var showModel = (title, content) => {
   })
 }
 
-module.exports = { formatTime, showBusy, showSuccess, showModel }
+module.exports = { formatTime, showBusy, showSuccess, showModel, ruleNumber }

@@ -67,7 +67,7 @@ exports.main = (event, context) => {
     doc.on('error', reject);
     doc.on('end', () => {
       resolve(cloud.uploadFile({
-        cloudPath: `${OPENID}-contract.pdf`,
+        cloudPath: `contract/${OPENID}-${name}.pdf`,
         fileContent: Buffer.concat(buffers),
       }));
     });
