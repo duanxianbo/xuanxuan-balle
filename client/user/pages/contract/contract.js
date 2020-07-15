@@ -1,14 +1,6 @@
 // client/pages/contact/contact.js
-var zhenzisms = require('../../utils/zhenzisms.js');
-
-
-function ruleNumber(ruleName) {
-  return (_rule, value) => {
-    if(isNaN(value)) {
-      return `${ruleName}: 请输入数字`
-    }
-  }
-}
+var zhenzisms = require('../../../utils/zhenzisms.js');
+const {ruleNumber} = require('../../../utils/util');
 
 Page({
 
@@ -151,7 +143,7 @@ Page({
   //获取短信验证码
   getCode(e) {
     let that = this
-    let random_code =/* Math.random().toString().slice(-6)*/12345;
+    let random_code = Math.random().toString().slice(-6);
     this.setData({
       real_code: `${random_code}`
     });

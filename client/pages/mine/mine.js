@@ -38,7 +38,7 @@ Page({
             util.showModel('您已签署合同',"合同信息会尽快发送至您的邮箱")
           }else{
             wx.navigateTo({
-              url: '/pages/contract/contract?user=' + that.data.userInfo.nickName
+              url: '/user/pages/contract/contract?user=' + that.data.userInfo.nickName
             })
             that.setData({
               contractInfo: contractInfo
@@ -96,7 +96,7 @@ Page({
   mineGroup: function (e) {
     if(this.data.flag==true){
     wx.navigateTo({
-      url: '/pages/mine/group?openId='+this.data.userInfo.openId
+      url: '/user/pages/group/group?openId='+this.data.userInfo.openId
     })
     }else{
       wx.showModal({
@@ -108,7 +108,7 @@ Page({
   mineOrder: function (e) {
     if (this.data.flag == true) {
     wx.navigateTo({
-      url: '/pages/mine/order?openId=' + this.data.userInfo.openId
+      url: '/user/pages/order/order?openId=' + this.data.userInfo.openId
     })
     } else {
       wx.showModal({
@@ -120,7 +120,7 @@ Page({
   mineYearCard: function (e) {
     if (this.data.flag == true) {
     wx.navigateTo({
-      url: '/pages/mine/yearCard?openId=' + this.data.userInfo.openId
+      url: '/user/pages/yearCard/yearCard?openId=' + this.data.userInfo.openId
     })
     }else{
       wx.showModal({

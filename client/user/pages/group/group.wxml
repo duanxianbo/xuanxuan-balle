@@ -1,4 +1,4 @@
-<!--pages/mine/group.wxml-->
+
 <view  class='table'>
   <view class='tr'>
       <!-- <view class='th'>订单号</view> -->

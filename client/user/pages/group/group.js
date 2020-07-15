@@ -1,4 +1,3 @@
-// pages/mine/group.js
 Page({
 
   /**
