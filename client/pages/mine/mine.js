@@ -1,59 +1,39 @@
 
-var app = getApp();
-
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
-var config = require('../../config')
 var util = require('../../utils/util.js')
+const db = wx.cloud.database();
 
 Page({
   data: {
     flag:false,
-    userInfo:[],
-    contractInfo: {}
+    userInfo:{}
   },
   onLoad: function (options) {
 
   },
-
   mineContract:function(){
-    let that = this
-    wx.request({
-      url: 'https://104724433.xuanxuanballe.club/weapp/contract_show',
-      method:"POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data:{
-        user: that.data.userInfo.nickName
-      },
-      success: function (res) {
-        console.log(res)
+    if (!this.data.flag) {
+      util.showModel("查询失败", "请先登录");
+      return;
+    }
 
-        if(res.data.code < 0){
-          util.showModel("查询失败", "请先登录")
-        } else{
-          var contractInfo = res.data.data.msg
-          console.log(contractInfo)
-          if (contractInfo.length){
-            util.showModel('您已签署合同',"合同信息会尽快发送至您的邮箱")
-          }else{
-            wx.navigateTo({
-              url: '/user/pages/contract/contract?user=' + that.data.userInfo.nickName
-            })
-            that.setData({
-              contractInfo: contractInfo
-            })
-  
-          }  
-        }
-      }
-
+    db.collection('contracts').where({
+      _openid: this.data.userInfo.openId,
     })
+    .get()
+    .then((res) => {
+      if (res.data.length) {
+        util.previewFile("下载合同", "预览失败", res.data[0].fileID);
+      } else {
+        wx.navigateTo({
+          url: `/user/pages/contract/contract?user=${this.data.userInfo.nickName}`
+        })
+      }
+    });
   },
 
   // 获取授权用户信息
   btn_sub: function (res) {
-    var that = this
     if (this.data.logged) return
 
     util.showBusy('正在登录')

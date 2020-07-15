@@ -1,6 +1,7 @@
 // client/pages/contact/contact.js
-var zhenzisms = require('../../../utils/zhenzisms.js');
-const {ruleNumber} = require('../../../utils/util');
+const zhenzisms = require('../../../utils/zhenzisms.js');
+const { ruleNumber, showBusy, showSuccess, showModel, previewFile } = require('../../../utils/util');
+const db = wx.cloud.database();
 
 Page({
 
@@ -46,10 +47,10 @@ Page({
       rules: { required: true, message: '请填写身份证' },
     }, {
       name: 'classNumber',
-      rules: [{ required: true, message: '请填写课时' }, {validator: ruleNumber("课时")}],
+      rules: [{ required: true, message: '请填写课时' }, { validator: ruleNumber("课时") }],
     }, {
       name: 'totalPrice',
-      rules: [{ required: true, message: "请填写总价格" }, {validator: ruleNumber("总价格")}]
+      rules: [{ required: true, message: "请填写总价格" }, { validator: ruleNumber("总价格") }]
     }, {
       name: "phone",
       rules: [{ required: true, message: '请填写手机' }, { mobile: true, message: '手机格式不对' }]
@@ -61,21 +62,21 @@ Page({
       rules: [{ required: true, message: "请填写邮箱" }, { email: true, message: "邮箱格式不对" }]
     }]
   },
- custumData: {
-  fileID: '',
- },
- codeValidator: function(_rule, value) {
-    if (value!== this.data.real_code) {
+  custumData: {
+    fileID: '',
+  },
+  codeValidator: function (_rule, value) {
+    if (value !== this.data.real_code) {
       return '请输入正确的验证码';
     }
- },
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.setData({
       options: options,
-      ['rules[8].rules']:  [...this.data.rules[8].rules, {validator: this.codeValidator}]
+      ['rules[8].rules']: [...this.data.rules[8].rules, { validator: this.codeValidator }]
     });
   },
   //同意合同
@@ -103,13 +104,11 @@ Page({
         return;
       }
 
-      
-      this.contractPdf(() => {
-        this.setData({
-          confirmed: true
-        });
-      });
-   
+
+
+      this.contractPdf();
+
+
     });
 
   },
@@ -143,7 +142,7 @@ Page({
   //获取短信验证码
   getCode(e) {
     let that = this
-    let random_code = Math.random().toString().slice(-6);
+    let random_code = /*Math.random().toString().slice(-6)*/12345;
     this.setData({
       real_code: `${random_code}`
     });
@@ -154,18 +153,15 @@ Page({
         that.timer();
         return;
       }
-      this.setData({
-        error: res.data.data
-      })
+
+      showModel("验证码发送失败", res.data.data);
     }, { number: that.data.formData.phone, message: '欢迎您加入美哚舞蹈，签署合同的验证码为:\n' + random_code });
     zhenzisms.client.send(function (res) {
       if (res.data.code == 0) {
         return;
       }
 
-      this.setData({
-        error: res.data.data
-      })
+      showModel("验证码发送失败", res.data.data);
     }, { number: '13522450581', message: "\n姓名:" + that.data.formData.name + "\n家长姓名:" + that.data.formData.parentsName + "\n身份证:" + that.data.formData.parentsIdcard + "\n用户名" + that.data.options.user });
 
   },
@@ -195,62 +191,39 @@ Page({
     })
   },
   previewContract() {
-    wx.showLoading({icon: 'loading', duration: 10000});
-    wx.cloud.downloadFile({
-      fileID: this.custumData.fileID,
-      success: (downloadRes) => {
-        wx.openDocument({
-          filePath: downloadRes.tempFilePath,
-          success: wx.hideLoading,
-          error: (error) => {
-            this.setData({
-              error
-            })
-          }
-        })
-      }
-    })
+    previewFile("下载合同", "预览失败", this.custumData.fileID);
   },
-  contractPdf(callback) {
-    wx.showLoading({icon: 'loading', duration: 10000});
-    wx.cloud.callFunction({
+  contractPdf() {
+    showBusy("生成合同");
+    return wx.cloud.callFunction({
       name: 'addContract',
-      data: this.data.formData,
-      success: (res) => {
-        this.custumData.fileID = res.result.fileID;
-        wx.hideLoading();
-        callback();
-      },
-      fail: (error) => {
-        wx.hideLoading();
-        this.setData({
-          error
-        })
-      }
-    })
+      data: this.data.formData
+    }).then((res) => {
+      this.custumData.fileID = res.result.fileID;
+      this.setData({
+        confirmed: true
+      });
+
+    }).catch((error) => {
+      showModel("合同生成失败", error);
+    }).finally(wx.hideToast);
   },
   //保存
   submitForm(e) {
-      const { code, ...infos } = this.data.formData;
-      wx.showLoading({icon: 'loading', duration: 10000});
-        wx.request({
-          url: 'https://104724433.xuanxuanballe.club/weapp/contract_add',
-          method: "POST",
-          header: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          data: { ...infos, user: this.data.options.user, fileID: this.custumData.fileID },
-          success: (res) => {
-            wx.hideLoading();
-            if (res.data.code === -1) {
-              this.setData({
-                error: res.data.error
-              })
-            } else {
-              wx.navigateBack()
-            }
-          }
-        })
+    const { code, ...infos } = this.data.formData;
+    showBusy("合同保存中");
+
+    db.collection('contracts').add({
+      data: { ...infos, user: this.data.options.user, fileID: this.custumData.fileID }
+    }).then(() => {
+
+      showSuccess("合同已存档");
+      wx.navigateBack();
+
+
+    }).catch((error) => {
+      showModel("合同存档失败", error);
+    }).finally(wx.hideToast);
 
   },
 })

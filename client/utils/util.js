@@ -52,4 +52,21 @@ var showModel = (title, content) => {
   })
 }
 
-module.exports = { formatTime, showBusy, showSuccess, showModel, ruleNumber }
+function previewFile(loadingText, errorText, fileId) {
+showBusy(loadingText);
+wx.cloud.downloadFile({
+  fileID: fileId
+})
+  .then((res) => {
+    return wx.openDocument({
+      filePath: res.tempFilePath,
+    });
+  })
+  .catch((error) => {
+    showModel(errorText, error);
+  })
+  .finally(wx.hideToast);
+}
+
+
+module.exports = { formatTime, showBusy, showSuccess, showModel, ruleNumber, previewFile }
