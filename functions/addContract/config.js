@@ -44,6 +44,7 @@ l、甲方及其监护人经向乙方咨询，并对甲乙方提供的课程服�
 日期           年      月    日                                                    日期           年      月   日`;
 
 
+
 module.exports = {
   companyName,
   rulesTitle,

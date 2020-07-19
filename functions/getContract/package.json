@@ -1,5 +1,5 @@
 {
-  "name": "addContract",
+  "name": "getContract",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,8 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "pdfkit": "^0.11.0",
-    "tencentcloud-sdk-nodejs": "^3.0.211",
-    "wx-server-sdk": "~2.1.2"
+    "wx-server-sdk": "~2.1.2",
+    "tencentcloud-sdk-nodejs": "^3.0.211"
   }
 }

@@ -1,0 +1,24 @@
+
+
+const { companyAccountId } = require("./tencentCloudConfig");
+const {initTencentCloudRequest} = require("./tencentCloudHelper");
+
+exports.uploadContract = async (contactName, ContractFile) => {
+  const { req, client } = initTencentCloudRequest("CreateContractByUploadRequest");
+  const params = `{\"Module\":\"ContractMng\",\"Operation\":\"CreateContractByUpload\",\"SignInfos\":[{\"AccountResId\":\"${companyAccountId}\"}],\"ContractName\":\"${contactName}\", \"ContractFile\": \"${ContractFile}\"}`
+  req.from_json_string(params);
+
+  return new Promise((resolve, reject) => {
+    client.CreateContractByUpload(req,  (errMsg, response) => {
+      if (errMsg) {
+        reject(errMsg);
+        return;
+      }
+  
+      resolve(response);
+    });
+  })
+
+
+
+}

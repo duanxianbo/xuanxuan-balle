@@ -33,13 +33,9 @@
 				<input bindinput="formInputChange" data-field="totalPrice" class="weui-input" />
 			</mp-cell>
 
-			<mp-cell prop="phone" title="手机号" ext-class=" weui-cell_vcode">
-				<input bindinput="bindPhoneInput" data-field="phone" class="weui-input" />
-				<view slot="footer" class="weui-vcode-btn" bindtap='getCode' hidden='{{hidden}}' disabled='{{btnDisabled}}'>{{btnValue}}</view>
-			</mp-cell>
-
-			<mp-cell prop="code" title="请输验证码" ext-class="">
-				<input bindinput="formInputChange" data-field="code" class="weui-input" />
+			<mp-cell prop="phone" title="手机号" ext-class="">
+				<input bindinput="formInputChange" data-field="phone" class="weui-input" />
+				<!--view slot="footer" class="weui-vcode-btn" bindtap='getCode' hidden='{{hidden}}' disabled='{{btnDisabled}}'>{{btnValue}}</view!-->
 			</mp-cell>
 
 			<mp-cell prop="email" title="邮箱" ext-class="">
@@ -60,47 +56,10 @@
 	</checkbox-group>
 	<view slot="button">
 		<button class="weui-btn weui-form-preview__btn" disabled="{{!confirmed}}" bindtap="previewContract">预览</button>
-		<button class="weui-btn" type="primary" disabled="{{!confirmed}}" bindtap="submitForm">确定</button>
+		<button class="weui-btn" type="primary" disabled="{{!confirmed}}" bindtap="showDialog">确定</button>
 	</view>
+
+	  <mp-dialog title="test" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{dialogButtons}}">
+        <view>test content</view>
+    </mp-dialog>
 </mp-form-page>
-
-<!--view class="container">
- <view class='row2'>
-   <input placeholder='请输入手机号' bindinput='bindPhoneInput' name="phone"/> 
- </view>
-  <view class='row2'>
-   <input placeholder='请输入您的邮箱' bindinput='bindEmailInput' name="email"/> 
- </view>
-
- <view class='row2'>
-   <input placeholder='请输验证码' bindinput='bindCodeInput' style='width:70%;' name="code"/> 
-   <button class='codeBtn' bindtap='getCode' hidden='{{hidden}}' disabled='{{btnDisabled}}' name="">{{btnValue}}</button>
- </view>
-
-<view class="flex-view">
-  <view class="col">
-    <button bindtap='contractPdf' class="contractBtn" hover-class="button" disabled="{{loading}}">
-      {{loading ? "加载中" : "合同预览"}}
-    </button>
-
-  </view>
-</view> 
-
-  <view class="col">
-    <checkbox-group bindchange="bindContract">
-      <checkbox value="{{confirmed}}">
-        <text style="background-color:#fff;">同意</text>  
-      </checkbox>
-    </checkbox-group>
-  </view>
-    <view wx:if="{{ !confirmed}}">
-      <text style="color:red;">提交合同之前请勾选同意</text>
-    </view>
-
- <view>
-
-   <button class='subBtn' formType="submit" disabled="{{!confirmed}}" >提交合同</button>
- </view>
- </form>
-
-</view!-->
