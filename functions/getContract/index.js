@@ -3,15 +3,21 @@ const cloud = require('wx-server-sdk')
 const {initTencentCloudRequest} = require("./tencentCloudHelper");
 cloud.init();
 
+const resKeyModeMap = {
+  upload: "ContractResId",
+  download: "ContractDownloadUrl"
+};
+
 // 云函数入口函数
 exports.main = async (event) => {
   const {req, client} = initTencentCloudRequest("DescribeTaskStatusRequest");
-  const res = await fetchContract(req, client, event.taskId);
+  const resKey = resKeyModeMap[event.mode || 'upload'];
+  const res = await fetchContract(req, client, event.taskId, resKey);
 
   return res;
 }
 
-function fetchContract(req, client, taskId) {
+function fetchContract(req, client, taskId, resKey) {
   const params = `{\"Module\":\"CommonMng\",\"Operation\":\"DescribeTaskStatus\",\"TaskId\":${taskId}}`
   req.from_json_string(params);
 
@@ -22,10 +28,10 @@ function fetchContract(req, client, taskId) {
 
       const  result = JSON.parse(response.TaskResult);
 
-      if (result.ContractResId) {
-        return resolve(result.ContractResId);
+      if (result[resKey]) {
+        return resolve(result[resKey]);
       }
 
-      resolve(fetchContract(req, client, taskId));
+      resolve(fetchContract(req, client, taskId, resKey));
   }));
 }

@@ -7,7 +7,7 @@ cloud.init()
 // 云函数入口函数
 exports.main = async (event) => {
   const { OPENID } = cloud.getWXContext();
-  const contractName = `${OPENID}-${event.name}`;
+  const contractName = `${OPENID}-${event.parentsName}`;
   
   const res = await uploadPdf(event, contractName, cloud);
   
