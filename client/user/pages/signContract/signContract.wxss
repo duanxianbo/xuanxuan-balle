@@ -1,1 +1,6 @@
 /* user/pages/signContract/signContract.wxss */
+
+.canvas {
+  width: 100%;
+  height: 400px;
+}

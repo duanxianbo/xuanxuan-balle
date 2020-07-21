@@ -1,5 +1,5 @@
 // client/pages/contact/contact.js
-const { ruleNumber, showBusy, showSuccess, showModel, previewFile } = require('../../../utils/util');
+const { ruleNumber, showBusy, showSuccess, previewFile } = require('../../../utils/util');
 const db = wx.cloud.database();
 
 Page({
@@ -125,9 +125,9 @@ Page({
     })
     .catch((error) => {
       this.setData({
-        confirmed: false
+        confirmed: false,
+        error: "请核对个人信息"
       });
-      showModel("合同生成失败", "请核对个人信息");
     })
     .finally(wx.hideToast);
   },
@@ -170,7 +170,9 @@ Page({
 
 
     }).catch((error) => {
-      showModel("合同存档失败", error);
+      this.setData({
+        error: "合同存档失败"
+      });
     }).finally(wx.hideToast);
 
   },
