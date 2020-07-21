@@ -21,8 +21,8 @@
 				<input bindinput="formInputChange" data-field="parentsName" class="weui-input" />
 			</mp-cell>
 
-			<mp-cell prop="parentsIdcard" title="身份证号码" ext-class="">
-				<input bindinput="formInputChange" data-field="parentsIdcard" class="weui-input" />
+			<mp-cell prop="parentsIdCard" title="身份证号码" ext-class="">
+				<input bindinput="formInputChange" data-field="parentsIdCard" class="weui-input" />
 			</mp-cell>
 
 			<mp-cell prop="classNumber" title="课时" ext-class="">
@@ -56,10 +56,6 @@
 	</checkbox-group>
 	<view slot="button">
 		<button class="weui-btn weui-form-preview__btn" disabled="{{!confirmed}}" bindtap="previewContract">预览</button>
-		<button class="weui-btn" type="primary" disabled="{{!confirmed}}" bindtap="showDialog">确定</button>
+		<button class="weui-btn" type="primary" disabled="{{!confirmed}}" bindtap="signContract">确定</button>
 	</view>
-
-	  <mp-dialog title="test" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{dialogButtons}}">
-        <view>test content</view>
-    </mp-dialog>
 </mp-form-page>

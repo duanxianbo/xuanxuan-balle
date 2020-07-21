@@ -11,9 +11,7 @@ Page({
     dialogShow: false,
     dialogButtons: [{text: '取消'}],
     confirmed: false,
-    second: 60,
     options: {},
-    loading: false,
     sexItems: [
       {
         value: "男",
@@ -40,7 +38,7 @@ Page({
       name: 'parentsName',
       rules: [{ required: true, message: '请填写父母姓名' }],
     }, {
-      name: 'parentsIdcard',
+      name: 'parentsIdCard',
       rules: { required: true, message: '请填写身份证' },
     }, {
       name: 'classNumber',
@@ -56,9 +54,10 @@ Page({
       rules: [{ required: true, message: "请填写邮箱" }, { email: true, message: "邮箱格式不对" }]
     }]
   },
-  custumData: {
+  customData: {
     fileID: '',
     taskId: 0,
+    accountResId: ''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -92,8 +91,7 @@ Page({
         })
         return;
       }
-
-      this.contractPdf();
+     this.generateContract();
     });
 
   },
@@ -112,43 +110,59 @@ Page({
   },
   
   previewContract() {
-    previewFile("下载合同", "预览失败", this.custumData.fileID);
+    previewFile("下载合同", "预览失败", this.customData.fileID);
   },
-  contractPdf() {
-    showBusy("生成合同");
-    return wx.cloud.callFunction({
-      name: 'addContract',
-      data: this.data.formData
-    }).then((res) => {
-      this.custumData.fileID = res.result.fileID;
-      this.custumData.taskId = res.result.taskId;
+  generateContract() {
+    showBusy("生成合同")
+    this.openAccount()
+    .then(() => {
+      return this.contractPdf();
+    })
+    .then(() => {
       this.setData({
         confirmed: true
       });
-
-    }).catch((error) => {
-      showModel("合同生成失败", error);
-    }).finally(wx.hideToast);
-  },
-  showDialog(e) {
-    showBusy("正在授权合同");
-    wx.cloud.callFunction({
-      name: "getContract",
-      data: {taskId: this.custumData.taskId}
-    }).then(contractResId => {
-      this.custumData.contractResId = contractResId;
+    })
+    .catch((error) => {
       this.setData({
-        dialogShow: true
+        confirmed: false
+      });
+      showModel("合同生成失败", "请核对个人信息");
+    })
+    .finally(wx.hideToast);
+  },
+  openAccount() {
+    return wx.cloud.callFunction({
+      name: "openClientAccount",
+      data: this.data.formData
+    }).then(res=> {
+      this.customData.accountResId = res.result;
+    })
+  },
+  contractPdf() {
+    return wx.cloud.callFunction({
+      name: 'addContract',
+      data: {...this.data.formData, accountResId: this.customData.accountResId}
+    }).then((res) => {
+      Object.assign(this.customData, {
+        fileID: res.result.fileID,
+        taskId:  res.result.taskId
       });
 
-      wx.hideToast();
     });
   },
+
+  signContract() {
+    wx.navigateTo({
+      url: `/user/pages/signContract/signContract?taskId=${this.customData.taskId}&accountResId=${this.customData.accountResId}&parentsName=${this.data.formData.parentsName}&phone=${this.data.formData.phone}`
+    })
+  },
+
   //保存
   submitForm(e) {
     showBusy("合同保存中");
     db.collection('contracts').add({
-      data: { ...this.data.formData, user: this.data.options.user, fileID: this.custumData.fileID }
+      data: { ...this.data.formData, user: this.data.options.user, fileID: this.customData.fileID }
     }).then(() => {
 
       showSuccess("合同已存档");

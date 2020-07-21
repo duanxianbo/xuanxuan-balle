@@ -13,9 +13,9 @@ exports.main = async (event) => {
   
   const downloadRes =  await cloud.getTempFileURL({
     fileList: [res.fileID],
-  })
+  });
 
-  const {TaskId} = await uploadContract(contractName, downloadRes.fileList[0].tempFileURL);
+  const {TaskId} = await uploadContract(contractName, downloadRes.fileList[0].tempFileURL, event.accountResId);
 
   return {...res, taskId: TaskId};
 }

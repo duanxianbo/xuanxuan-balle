@@ -1,0 +1,12 @@
+<!--user/pages/signContract/signContract.wxml-->
+<mp-form-page>
+	<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+<mp-form id="form">
+	<mp-cells>
+		<mp-cell prop="code" title="输入验证码" ext-class=" weui-cell_vcode">
+			<input bindinput="formInputChange" data-field="code" class="weui-input" placeholder="" />
+			<button slot="footer" class="weui-vcode-btn" bindtap="sendVcode" disabled="{{vcodeButtonDisabled}}" >{{vcodeButtonText}}</button>
+		</mp-cell>
+	</mp-cells>
+</mp-form>
+</mp-form-page>

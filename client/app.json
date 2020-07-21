@@ -91,7 +91,8 @@
       "pages/group/group",
       "pages/contract/contract",
       "pages/order/order",
-      "pages/yearCard/yearCard"
+      "pages/yearCard/yearCard",
+      "pages/signContract/signContract"
     ]
   }],
   "plugins": {

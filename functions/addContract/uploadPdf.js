@@ -4,7 +4,7 @@ const {detailRules, otherContractRules, contractRules,  companyName,
   contractTtile} = require('./config');
 
 exports.uploadPdf = (event, contractName, cloud) => {
-  const { name, sex, birth, parentsName, parentsIdcard, classNumber, totalPrice } = event;
+  const { name, sex, birth, parentsName, parentsIdCard, classNumber, totalPrice } = event;
 
   return new Promise((resolve, reject) => {
     const doc = new PDFDocument();
@@ -32,7 +32,7 @@ exports.uploadPdf = (event, contractName, cloud) => {
     doc.moveUp();
     doc.text(";身份证号码 ", 270)
     doc.moveUp();
-    doc.text(parentsIdcard, 360, undefined, {underline: true})
+    doc.text(parentsIdCard, 360, undefined, {underline: true})
     doc.moveUp();
     doc.text(";", 540);
     doc.moveDown();
