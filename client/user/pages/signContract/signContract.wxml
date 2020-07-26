@@ -1,24 +1,12 @@
 <!--user/pages/signContract/signContract.wxml-->
-<mp-form-page title="请在下方空白处签名">
-	<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
-<canvas class="canvas" id="canvas" canvas-id="canvas"
-        disable-scroll="true" bindtouchstart="canvasStart"
-        bindtouchmove="canvasMove" bindtouchend="canvasEnd"
-        touchcancel="canvasEnd" binderror="canvasIdErrorCallback">
-</canvas>
 
+<view class="page">
+ <view class="page__hd">
+        <view class="page__title">请在下方空白处签名</view>
+    </view>
+ <view class="page__bd">
+  <draw-canvas canvas-id="canvas" binddrawn="onDrawnChanged" />
 
-<mp-form id="form">
-	<mp-cells>
-		<mp-cell prop="code" title="输入验证码" ext-class=" weui-cell_vcode">
-			<input bindinput="codeInputChange" data-field="code" class="weui-input" placeholder="" />
-			<button slot="footer" class="weui-vcode-btn" bindtap="sendVcode" disabled="{{vcodeButtonDisabled}}" >{{vcodeButtonText}}</button>
-		</mp-cell>
-	</mp-cells>
-</mp-form>
-
-	<view slot="button">
-		<button class="weui-btn weui-form-preview__btn" disabled="{{!ready}}"  bindtap="cleardraw">清除</button>
-		<button class="weui-btn" type="primary" disabled="{{!ready || !code}}" bindtap="confirmContract">签署合同</button>
-	</view>
-</mp-form-page>
+<verification-code contract-res-id="{{contractResId}}" account-res-id="{{accountResId}}" show="{{dialogShow}}" bindvcodechecked="onVcodeChecked"/>
+  </view>
+</view>

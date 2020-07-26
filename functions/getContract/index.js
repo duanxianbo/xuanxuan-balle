@@ -23,7 +23,7 @@ function fetchContract(req, client, taskId, resKey) {
 
   return new Promise((resolve,reject) => client.DescribeTaskStatus(req, (errMsg, response) => {
       if (errMsg) {
-          reject(errMsg);
+          reject(errMsg.message);
       }
 
       const  result = JSON.parse(response.TaskResult);

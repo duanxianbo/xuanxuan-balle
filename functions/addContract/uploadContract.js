@@ -11,7 +11,7 @@ exports.uploadContract = async (contactName, ContractFile, userAccountId) => {
   return new Promise((resolve, reject) => {
     client.CreateContractByUpload(req,  (errMsg, response) => {
       if (errMsg) {
-        reject(errMsg);
+        reject(errMsg.message);
         return;
       }
   

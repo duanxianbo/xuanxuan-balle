@@ -41,7 +41,6 @@
 			<mp-cell prop="email" title="邮箱" ext-class="">
 				<input bindinput="formInputChange" data-field="email" class="weui-input" />
 			</mp-cell>
-
 		</mp-cells>
 
 
@@ -56,6 +55,12 @@
 	</checkbox-group>
 	<view slot="button">
 		<button class="weui-btn weui-form-preview__btn" disabled="{{!confirmed}}" bindtap="previewContract">预览</button>
-		<button class="weui-btn" type="primary" disabled="{{!confirmed}}" bindtap="signContract">确定</button>
+		<button class="weui-btn" type="primary" disabled="{{!confirmed}}" bindtap="showVcodeDialog">确定</button>
 	</view>
 </mp-form-page>
+
+<verification-code contract-res-id="{{contractResId}}" show="{{dialogShow}}" bindvcodechecked="onVcodeChecked"/>
+
+
+
+

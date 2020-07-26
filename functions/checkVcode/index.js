@@ -1,6 +1,7 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 const {initTencentCloudRequest} = require("./tencentCloudHelper");
+const {companyAccountId} = require("./tencentCloudConfig");
 cloud.init();
 
 
@@ -9,12 +10,12 @@ exports.main = async (event) => {
   const {req, client} = initTencentCloudRequest("CheckVcodeRequest");
   const {accountResId, contractResId, code} = event;
   
-  const params = `{\"Module\":\"VerifyCode\",\"Operation\":\"CheckVcode\",\"AccountResId\":\"${accountResId}\",\"ContractResId\":\"${contractResId}\",\"VerifyCode\":\"${code}\"}`;
+  const params = `{\"Module\":\"VerifyCode\",\"Operation\":\"CheckVcode\",\"AccountResId\":\"${accountResId || companyAccountId}\",\"ContractResId\":\"${contractResId}\",\"VerifyCode\":\"${code}\"}`;
   req.from_json_string(params);
   
   return new Promise((resolve, reject) => client.CheckVcode(req, (errMsg, response) => {
       if (errMsg) {
-         reject(errMsg);
+         reject(errMsg.message);
       }
   
       resolve(response);

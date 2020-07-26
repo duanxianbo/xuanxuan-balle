@@ -1,5 +1,5 @@
 // client/pages/contact/contact.js
-const { ruleNumber, showBusy, showSuccess, previewFile } = require('../../../utils/util');
+const { ruleNumber, showBusy, showSuccess, previewFile, showModel } = require('../../../utils/util');
 const db = wx.cloud.database();
 
 Page({
@@ -8,8 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    contractResId: '',
     dialogShow: false,
-    dialogButtons: [{text: '取消'}],
     confirmed: false,
     options: {},
     sexItems: [
@@ -46,7 +46,8 @@ Page({
     }, {
       name: 'totalPrice',
       rules: [{ required: true, message: "请填写总价格" }, { validator: ruleNumber("总价格") }]
-    }, {
+    },
+    {
       name: "phone",
       rules: [{ required: true, message: '请填写手机' }, { mobile: true, message: '手机格式不对' }]
     }, {
@@ -91,16 +92,10 @@ Page({
         })
         return;
       }
-     this.generateContract();
+      this.generateContract();
     });
 
   },
-  tapDialogButton(e) {
-    this.setData({
-        dialogShow: false
-    })
-},
-
   formInputChange(e) {
     const { field } = e.currentTarget.dataset
     this.setData({
@@ -108,72 +103,106 @@ Page({
       [`formData.${field}`]: e.detail.value
     })
   },
-  
+
   previewContract() {
     previewFile("下载合同", "预览失败", this.customData.fileID);
   },
   generateContract() {
     showBusy("生成合同")
     this.openAccount()
-    .then(() => {
-      return this.contractPdf();
-    })
-    .then(() => {
-      this.setData({
-        confirmed: true
-      });
-    })
-    .catch((error) => {
-      this.setData({
-        confirmed: false,
-        error: "请核对个人信息"
-      });
-    })
-    .finally(wx.hideToast);
+      .then(() => {
+        return this.contractPdf();
+      })
+      .then(() => {
+        this.setData({
+          confirmed: true
+        });
+      })
+      .catch((error) => {
+        this.setData({
+          confirmed: false
+        });
+        showModel("生成错误", error.message)
+      })
+      .finally(wx.hideToast);
   },
   openAccount() {
     return wx.cloud.callFunction({
       name: "openClientAccount",
       data: this.data.formData
-    }).then(res=> {
+    }).then(res => {
       this.customData.accountResId = res.result;
-    })
+    }).catch((error) => {
+      throw new Error("请验证身份信息")
+    });
   },
   contractPdf() {
     return wx.cloud.callFunction({
       name: 'addContract',
-      data: {...this.data.formData, accountResId: this.customData.accountResId}
+      data: { ...this.data.formData, accountResId: this.customData.accountResId }
     }).then((res) => {
       Object.assign(this.customData, {
         fileID: res.result.fileID,
-        taskId:  res.result.taskId
+        taskId: res.result.taskId
       });
-
-    });
-  },
-
-  signContract() {
-    wx.navigateTo({
-      url: `/user/pages/signContract/signContract?taskId=${this.customData.taskId}&accountResId=${this.customData.accountResId}&parentsName=${this.data.formData.parentsName}&phone=${this.data.formData.phone}`
-    })
-  },
-
-  //保存
-  submitForm(e) {
-    showBusy("合同保存中");
-    db.collection('contracts').add({
-      data: { ...this.data.formData, user: this.data.options.user, fileID: this.customData.fileID }
-    }).then(() => {
-
-      showSuccess("合同已存档");
-      wx.navigateBack();
-
 
     }).catch((error) => {
-      this.setData({
-        error: "合同存档失败"
-      });
-    }).finally(wx.hideToast);
-
+      throw new Error("添加合同失败")
+    });
   },
+  onVcodeChecked() {
+    wx.navigateTo({
+      url: `/user/pages/signContract/signContract?contractResId=${this.data.contractResId}&accountResId=${this.customData.accountResId}&phone=${this.data.formData.phone}`,
+      events: {
+        contractSigned: () => {
+          showBusy('合同存档中')
+          return Promise.all([
+            this.submitForm(), this.updateContract()])
+            .then(() => {
+              showSuccess("合同已存档")
+              wx.navigateBack();
+            }).catch((error) => {
+              showModel("存档错误", error.message);
+            }).finally(wx.hideToast);
+        }
+      }
+    })
+  },
+  showVcodeDialog() {
+    showBusy("获取合同")
+
+    return wx.cloud.callFunction({
+      name: "getContract",
+      data: { taskId: this.customData.taskId }
+    })
+    .then((res) => {
+      this.setData({
+        contractResId: res.result,
+        dialogShow: true
+      })
+    })
+    .catch(error => {
+      showModel("获取错误", "获取合同失败");
+    })
+    .finally(wx.hideToast)
+  },
+  //保存
+  submitForm(e) {
+    db.collection('contracts').add({
+      data: { ...this.data.formData, user: this.data.options.user, fileID: this.customData.fileID, contractResId: this.data.contractResId, accountResId: this.customData.accountResId }
+    }).catch((error) => {
+      throw new Error("保存合同失败")
+    });
+  },
+  updateContract() {
+    return wx.cloud.callFunction({
+      name: "updateContract",
+      data: {
+        parentsName: this.data.formData.parentsName,
+        contractResId: this.data.contractResId
+      }
+    }).catch((error) => {
+      throw new Error("更新合同失败")
+    });
+  }
 })

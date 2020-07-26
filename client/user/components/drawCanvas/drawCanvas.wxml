@@ -1,0 +1,8 @@
+<!--user/components/canvas/canvas.wxml-->
+<canvas class="canvas" id="{{canvasId}}" canvas-id="{{canvasId}}"
+        disable-scroll="true" bindtouchstart="canvasStart"
+        bindtouchmove="canvasMove" bindtouchend="canvasEnd"
+        touchcancel="canvasEnd" binderror="canvasIdErrorCallback">
+</canvas>
+<button class="weui-btn weui-btn_default" disabled="{{!drawn}}"  bindtap="cleardraw">清除</button>
+<button class="weui-btn" type="primary" disabled="{{!drawn}}" bindtap="confirmSignature">签署合同</button>

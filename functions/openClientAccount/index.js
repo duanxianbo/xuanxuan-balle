@@ -14,7 +14,7 @@ exports.main = async (event) => {
   
   return new Promise((resolve, reject) => client.CreatePersonalAccount(req, (errMsg, response) => {
       if (errMsg) {
-          reject(errMsg);
+          reject(errMsg.message);
       }
   
       resolve(response.AccountResId);

@@ -3,7 +3,7 @@ const secretKey = "0jBblhMbcNs7MLlumPlqhX8VbPzLQKH3";
 const apiEnd = "ds.tencentcloudapi.com";
 const apiLocation = "ap-beijing";
 const companyAccountId = "dcu-3eeeeiv2zb";
-const sealResId = "dcs-7l2i37bokz";
+const sealResId = "dcs-1zxj4ow8fz";
 
 module.exports={
   secretId, secretKey, apiEnd, apiLocation,

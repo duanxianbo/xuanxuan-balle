@@ -41,6 +41,7 @@ var showSuccess = text => wx.showToast({
   icon: 'success'
 })
 
+
 // 显示失败提示
 var showModel = (title, content) => {
   wx.hideToast();
@@ -63,7 +64,7 @@ wx.cloud.downloadFile({
     });
   })
   .catch((error) => {
-    showModel(errorText, error);
+    showModel("预览错误", errorText);
   })
   .finally(wx.hideToast);
 }
