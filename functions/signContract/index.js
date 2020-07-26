@@ -18,7 +18,7 @@ exports.main = async (event) => {
 function signContract({contractResId, accountResId, sealResId, imageData, keyword}) {
   const {req, client} = initTencentCloudRequest("SignContractByKeywordRequest");
 
-  const params = `{\"Module\":\"ContractMng\",\"Operation\":\"SignContractByKeyword\",\"ContractResId\":\"${contractResId}\",\"AccountResId\":\"${accountResId}\",\"SealResId\":\"${imageData ? "" : sealResId}\",\"SignKeyword\":{\"Keyword\":\"${keyword}\",\"OffsetCoordX\":\"0\",\"OffsetCoordY\":\"20\",\"ImageWidth\":\"150\",\"ImageHeight\":\"150\"},\"ImageData\":\"${imageData}\"}`;
+  const params = `{\"Module\":\"ContractMng\",\"Operation\":\"SignContractByKeyword\",\"ContractResId\":\"${contractResId}\",\"AccountResId\":\"${accountResId}\",\"SealResId\":\"${sealResId ? sealResId : ""}\",\"SignKeyword\":{\"Keyword\":\"${keyword}\",\"OffsetCoordX\":\"0\",\"OffsetCoordY\":\"20\",\"ImageWidth\":\"150\",\"ImageHeight\":\"150\"},\"ImageData\":\"${imageData}\"}`;
   req.from_json_string(params);
   
   return new Promise((resolve, reject) => client.SignContractByKeyword(req, (errMsg, response) => {

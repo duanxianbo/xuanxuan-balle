@@ -11,8 +11,8 @@
 				</mp-checkbox-group>
 			</mp-cell>
 
-			<mp-cell prop="birth" title="出生年月：" ext-class="">
-				<picker mode="date" value="{{formData.birth}}" start="1994-01-01" end="2019-09-01" bindchange="formInputChange" data-field="birth">
+			<mp-cell prop="birth" title="出生年月" ext-class="">
+				<picker mode="date" value="{{formData.birth}}" start="1960-01-01" end="2019-09-01" bindchange="formInputChange" data-field="birth">
 					<view>{{formData.birth}}</view>
 				</picker>
 			</mp-cell>
@@ -35,7 +35,7 @@
 
 			<mp-cell prop="phone" title="手机号" ext-class="">
 				<input bindinput="formInputChange" data-field="phone" class="weui-input" />
-				<!--view slot="footer" class="weui-vcode-btn" bindtap='getCode' hidden='{{hidden}}' disabled='{{btnDisabled}}'>{{btnValue}}</view!-->
+
 			</mp-cell>
 
 			<mp-cell prop="email" title="邮箱" ext-class="">

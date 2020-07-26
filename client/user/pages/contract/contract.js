@@ -23,7 +23,7 @@ Page({
       }
     ],
     formData: {
-      birth: "1994-01-01"
+      birth: "1960-01-01"
     },
     rules: [{
       name: 'name',
@@ -105,7 +105,7 @@ Page({
   },
 
   previewContract() {
-    previewFile("下载合同", "预览失败", this.customData.fileID);
+    previewFile("下载合同", "预览失败", this.customData.fileID);//TODO: use behavior
   },
   generateContract() {
     showBusy("生成合同")

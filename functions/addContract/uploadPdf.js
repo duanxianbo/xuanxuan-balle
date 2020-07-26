@@ -2,6 +2,11 @@ const PDFDocument = require('pdfkit');
 const {detailRules, otherContractRules, contractRules,  companyName,
   rulesTitle,
   contractTtile} = require('./config');
+const now = new Date();
+
+const year = now.getFullYear();
+const month = now.getMonth() + 1;
+const date = now.getDate();
 
 exports.uploadPdf = (event, contractName, cloud) => {
   const { name, sex, birth, parentsName, parentsIdCard, classNumber, totalPrice } = event;
@@ -56,6 +61,7 @@ exports.uploadPdf = (event, contractName, cloud) => {
     doc.fontSize(20).text(rulesTitle, {align: "center"});
 
     doc.fontSize(12).text(detailRules, { align: "justify"});
+    doc.text(`日期 ${year} 年 ${month} 月 ${date} 日                                                    日期 ${year} 年 ${month} 月 ${date} 日`);
 
     const buffers = [];
     doc.on('data', buffers.push.bind(buffers));
