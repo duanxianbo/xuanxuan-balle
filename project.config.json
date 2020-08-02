@@ -32,7 +32,7 @@
 	},
 	"appid": "wx158a051ad1abcd07",
 	"projectname": "Balle-dynamic",
-	"libVersion": "2.6.5",
+	"libVersion": "2.12.0",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"compileType": "miniprogram",

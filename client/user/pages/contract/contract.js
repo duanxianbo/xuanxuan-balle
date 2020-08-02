@@ -151,6 +151,12 @@ Page({
     });
   },
   onVcodeChecked() {
+
+    wx.hideToast();
+    this.setData({
+      dialogShow: false
+    });
+
     wx.navigateTo({
       url: `/user/pages/signContract/signContract?contractResId=${this.data.contractResId}&accountResId=${this.customData.accountResId}&phone=${this.data.formData.phone}`,
       events: {
@@ -188,7 +194,7 @@ Page({
   },
   //保存
   submitForm(e) {
-    db.collection('contracts').add({
+   return db.collection('contracts').add({
       data: { ...this.data.formData, user: this.data.options.user, fileID: this.customData.fileID, contractResId: this.data.contractResId, accountResId: this.customData.accountResId }
     }).catch((error) => {
       throw new Error("保存合同失败")

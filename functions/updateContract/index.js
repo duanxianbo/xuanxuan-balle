@@ -9,30 +9,36 @@ exports.main = async (event) => {
   const taskId = await downloadContract(event.contractResId);
   const { OPENID } = cloud.getWXContext();
   const contractName = `${OPENID}-${event.parentsName}`;
-  
-  const res = await cloud.callFunction({
+
+  let res;
+
+  try {
+  res = await cloud.callFunction({
     name: 'getContract',
     data: {
       taskId,
       mode: "download"
     }
   });
+ } catch (error) {
+   throw error;
+ }
 
-  const imageData = await new Promise((resolve, reject) => request({
-    url: res.result,
-    encoding: null
-  }, (err, _resp, buffer) => {
-    if (err) {
-      reject(err);
-    }
+ const imageData = await new Promise((resolve, reject) => request({
+  url: res.result,
+  encoding: null
+}, (err, _resp, buffer) => {
+  if (err) {
+    reject(err);
+  }
 
-    resolve(buffer);
-  }));
+  resolve(buffer);
+}));
 
-  cloud.uploadFile({
-    cloudPath: `contract/${contractName}.pdf`,
-    fileContent: imageData
-  })
+cloud.uploadFile({
+  cloudPath: `contract/${contractName}.pdf`,
+  fileContent: imageData
+})
 
 
 
