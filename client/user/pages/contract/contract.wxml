@@ -62,5 +62,3 @@
 <verification-code contract-res-id="{{contractResId}}" show="{{dialogShow}}" bindvcodechecked="onVcodeChecked"/>
 
 
-
-

@@ -1,21 +1,21 @@
 <!--user/components/sendVcode/sendVcode.wxml-->
-<mp-halfScreenDialog 
-  show="{{show}}"
-  maskClosable="{{false}}" 
-  title="输入验证码" 
->
+<mp-halfScreenDialog show="{{show}}" maskClosable="{{false}}" title="输入验证码">
 
 
- <view slot="footer">
+	<view slot="footer">
+
+		<mp-form id="vcodeForm">
+			<mp-cells>
+				<mp-cell prop="code" title=""  ext-class="vcode-cell">
+					<input bindinput="codeInputChange" data-field="code" class="weui-input" placeholder="输入验证码" />
+				</mp-cell>
+			</mp-cells>
+		</mp-form>
+
+			<button class="weui-btn weui-btn_default vcode-button" bindtap="sendVcode" disabled="{{sendVcodeButtonDisabled}}">{{sendVcodeButtonText}}</button>
+			<button class="weui-btn vcode-button" bindtap="checkVcode" type="primary">确认</button>
 
 
- <mp-form id="vcodeForm">
-		<mp-cell prop="code" title="">
-			<input bindinput="codeInputChange" data-field="code" class="weui-input" placeholder="输入验证码" />
-		</mp-cell>
-    </mp-form>
-    <button class="weui-btn weui-btn_default" bindtap="sendVcode" disabled="{{sendVcodeButtonDisabled}}">{{sendVcodeButtonText}}</button>
-    <button class="weui-btn" bindtap="checkVcode" type="primary">确认</button>
-        </view>
+	</view>
 
- </mp-halfScreenDialog>
+</mp-halfScreenDialog>

@@ -1,6 +1,8 @@
 /**app.wxss**/
 @import '/miniprogram_npm/weui-miniprogram/weui-wxss/dist/style/weui.wxss';
 @import '/miniprogram_npm/weui-miniprogram/weui-wxss/dist/style/icon/weui-icon.wxss';
+@import './app-weui.wxss';
+
 .container {
   left:18rpx;
   height: 100%;
@@ -12,3 +14,8 @@
   padding: 0rpx 0;
   box-sizing: border-box;
 } 
+
+.vcode-cell {
+  border-left: 1px solid var(--weui-FG-3);
+  border-right: 1px solid var(--weui-FG-3);
+}

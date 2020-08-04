@@ -1,3 +1,11 @@
 /* user/components/sendVcode/sendVcode.wxss */
 @import '/miniprogram_npm/weui-miniprogram/weui-wxss/dist/style/weui.wxss';
 @import '/miniprogram_npm/weui-miniprogram/weui-wxss/dist/style/icon/weui-icon.wxss';
+@import '/app-weui.wxss';
+
+.vcode-button.weui-btn {
+  width: auto!important;
+  vertical-align: auto!important;
+  margin-top: 16px!important;
+}
+  
