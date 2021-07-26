@@ -13,6 +13,7 @@ Page({
     tab: [],
     name:[],
     xueshi:[],
+    wasted: [],
     isChecked: false,
     userInfo: {},
     logged: false,
@@ -71,6 +72,12 @@ Page({
           xueshi.push(tab[index].class)
           that.setData({
             xueshi: xueshi
+          })
+
+          var wasted = []
+          wasted.push(tab[index].waste)
+          that.setData({
+            wasted: wasted
           })
 
           console.log(xueshi)

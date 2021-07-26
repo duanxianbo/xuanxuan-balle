@@ -4,10 +4,12 @@
       <image src='/pages/images/number.png' class='th1'></image>
       <view class='th'>姓名</view>
       <view class='th'>剩余课时</view>
+      <view class='th'>消耗课时</view>
   </view >
   <view class='tr'>
     <view class='td'> {{name}}</view>
     <view class='td'> {{xueshi}}</view>
+    <view class='td'> {{wasted}}</view>
   </view>
    
 </view>

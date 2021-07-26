@@ -113,3 +113,6 @@
 - [Wafer2 服务端 SDK API 文档](https://github.com/tencentyun/wafer2-node-sdk/blob/master/API.md)
 - [Wafer2 客户端 SDK 使用文档](https://github.com/tencentyun/wafer2-client-sdk/blob/master/README.md)
 
+
+下载项目，进入client 文件夹， 使用命令npm i， 进入微信开发者工具， 工具 -》 构建npm
+
